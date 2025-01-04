@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white text-gray-800; // Set white background and a default text color
+  // Ensure full height for consistent styling
+}
+
+@layer base {
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Italic.eot");
+    src: local("Avenir Next Rounded Std Italic"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Italic"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Italic.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Italic.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Italic.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Italic.ttf")
+        format("truetype");
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-BoldIt.eot");
+    src: local("Avenir Next Rounded Std Bold Italic"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-BoldIt"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-BoldIt.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-BoldIt.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-BoldIt.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-BoldIt.ttf")
+        format("truetype");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Reg.eot");
+    src: local("Avenir Next Rounded Std Regular"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Reg"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Reg.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Reg.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Reg.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Reg.ttf")
+        format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Med.eot");
+    src: local("Avenir Next Rounded Std Medium"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Med"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Med.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Med.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Med.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Med.ttf")
+        format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-DemiIt.eot");
+    src: local("Avenir Next Rounded Std Demi Italic"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-DemiIt"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-DemiIt.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-DemiIt.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-DemiIt.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-DemiIt.ttf")
+        format("truetype");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-MedIt.eot");
+    src: local("Avenir Next Rounded Std Medium Italic"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-MedIt"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-MedIt.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-MedIt.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-MedIt.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-MedIt.ttf")
+        format("truetype");
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Demi.eot");
+    src: local("Avenir Next Rounded Std Demi"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Demi"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Demi.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Demi.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Demi.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Demi.ttf")
+        format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Avenir Next Rounded Std";
+    src: url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Bold.eot");
+    src: local("Avenir Next Rounded Std Bold"),
+      local("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Bold"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Bold.eot?#iefix")
+        format("embedded-opentype"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Bold.woff2")
+        format("woff2"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Bold.woff")
+        format("woff"),
+      url("fonts/avenir-next-rounded-std/AvenirNextRoundedStd-Bold.ttf")
+        format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  .MuiTypography-root {
+    font-family: "Montserrat", "san-serif" !important;
+  }
+}
+
+@layer components {
+  .placeholder-data {
+    .close-btn {
+      @apply lg:cc-text-white;
+    }
+  }
+
+  .initial-screen {
+    @apply cc-flex-grow;
+    @apply cc-bg-[#0D1120];
+    @apply cc-text-center;
+    @apply cc-p-10;
+
+    @apply xl:cc-flex xl:cc-flex-row xl:cc-items-center xl:cc-w-[35%];
+
+    &__text {
+      @apply cc-text-white cc-font-heading cc-font-black cc-uppercase cc-text-4xl;
+      @apply xl:cc-text-5xl;
+      @apply xl:cc-flex-grow;
+    }
+  }
+
+  .loading-bar {
+    & > div {
+      animation: loading-bar 2s infinite;
+    }
+  }
+}
+
+@keyframes loading-bar {
+  0% {
+    left: -15%;
+  }
+
+  50% {
+    left: 85%;
+  }
+
+  100% {
+    left: -15%;
+  }
+}
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-icon {
+  transition: transform 0.6s ease-in-out;
+}
+
+.rotate-icon:hover {
+  animation: rotate360 0.6s ease-in-out;
+}
+
+@keyframes moving {
+  50% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+    right: 0;
+    left: unset;
+  }
+}
+.responsive-drawer::after {
+  display: none !important;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+// Custom Scrollbar
+
+.scroll-bar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #00000014;
+}
+
+.scroll-bar::-webkit-scrollbar {
+  width: 4px;
+  background-color: #f5f5f5;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #686a70;
+}
