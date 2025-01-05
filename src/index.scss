@@ -7,91 +7,6 @@ body {
   @apply bg-white text-gray-800; // Set white background and a default text color
   // Ensure full height for consistent styling
 }
-@layer components {
-  .button-primary {
-    @apply bg-[#0d1120] h-[var(--button-height)] w-[var(--button-width)] ml-2 relative rounded-full p-2 font-normal border border-black capitalize text-white text-[12px] transition-colors duration-300;
-  }
-
-  .button-primary:hover {
-    @apply bg-white border-[#1cbcba] text-[#1cbcba];
-  }
-
-  .button-primary.outlined-primary {
-    @apply bg-white text-[#0d1120];
-  }
-
-  .button-primary.outlined-primary:hover {
-    @apply bg-[#1cbcba] border-transparent border-2 text-white;
-  }
-}
-@media (min-width: 960px) {
-  .button-primary {
-    @apply text-[14px] px-8 py-2;
-  }
-}
-
-.button-secondary {
-  @apply bg-[#0d1120] h-[var(--button-height)] w-[var(--button-width)] ml-2 relative rounded-full py-2 px-4 font-normal text-white text-[12px] capitalize border border-black transition-all;
-}
-
-.button-secondary.outlined-secondary {
-  @apply bg-white text-[#0d1120];
-}
-
-.button-secondary:hover {
-  @apply bg-white border-[#1cbcba] text-[#1cbcba];
-}
-
-.button-secondary.outlined-secondary:hover {
-  @apply bg-[#1cbcba] border-transparent text-white;
-}
-
-@media (min-width: 960px) {
-  .button-secondary {
-    @apply text-[14px] px-8 py-2;
-  }
-}
-
-/* Define custom button style using standard CSS */
-// .tailwind-button-custom {
-//   background-color: #0d1120; /* Default for non-outlined variant */
-//   height: var(--button-height);
-//   width: var(--button-width);
-//   margin-left: 8px;
-//   position: relative;
-//   border-radius: 100px;
-//   padding: 10px;
-//   font-weight: 400;
-//   border: 1px solid black;
-//   text-transform: capitalize;
-//   color: #ffffff; /* Default for non-outlined variant */
-//   font-size: 12px;
-//   transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-// }
-
-// .tailwind-button-custom.outlined {
-//   background-color: #ffffff;
-//   color: #0d1120;
-// }
-
-// .tailwind-button-custom:hover {
-//   background-color: #ffffff;
-//   border-color: #1cbcba;
-//   color: #1cbcba;
-// }
-
-// .tailwind-button-custom.outlined:hover {
-//   background-color: #1cbcba;
-//   border: 2px solid transparent;
-//   color: #ffffff;
-// }
-
-// @media (min-width: 960px) {
-//   .tailwind-button-custom {
-//     font-size: 14px;
-//     padding: 10px 30px;
-//   }
-// }
 
 @layer base {
   @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
@@ -264,6 +179,39 @@ body {
       animation: loading-bar 2s infinite;
     }
   }
+  // .button-primary {
+  //   @apply bg-[#0d1120] h-[var(--button-height)] w-[var(--button-width)] ml-2 relative rounded-full p-2 font-normal border border-black capitalize text-white text-[12px] transition-colors duration-300;
+  // }
+
+  // .button-primary:hover {
+  //   @apply bg-white border-[#1cbcba] text-[#1cbcba];
+  // }
+
+  // .button-primary.outlined-primary {
+  //   @apply bg-white text-[#0d1120];
+  // }
+
+  // .button-primary.outlined-primary:hover {
+  //   @apply bg-[#1cbcba] border-transparent border-2 text-white;
+  // }
+
+  // /* Responsive styles for button-primary */
+
+  // .button-secondary {
+  //   @apply bg-[#0d1120] h-[var(--button-height)] w-[var(--button-width)] ml-2 relative rounded-full py-2 font-normal text-white text-[12px] capitalize border border-black transition-all;
+  // }
+
+  // .button-secondary.outlined-secondary {
+  //   @apply bg-white text-[#0d1120];
+  // }
+
+  // .button-secondary:hover {
+  //   @apply bg-white border-[#1cbcba] text-[#1cbcba];
+  // }
+
+  // .button-secondary.outlined-secondary:hover {
+  //   @apply bg-[#1cbcba] border-transparent text-white;
+  // }
 }
 
 @keyframes loading-bar {
