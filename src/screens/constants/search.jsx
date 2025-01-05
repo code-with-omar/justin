@@ -3,6 +3,8 @@ import Logo from "../../assets/new-logo-trans.png"; // Make sure the path is cor
 import { useModal } from "../../contexts/Modal";
 import { ArrowForward } from "../../components/common/svgs"; // Assuming ArrowForward is an SVG component
 
+import Button from "../../components/common/button/button";
+
 export default function Search({
   setIsAdvSearch,
   isAdvSearch,
@@ -53,10 +55,10 @@ export default function Search({
 
       <form
         id="advanced-search-form"
-        className="flex items-center justify-center flex-col sm:flex-row"
+        className="flex flex-col sm:flex-row items-center justify-center"
         onSubmit={(e) => e.preventDefault()} // Prevent page reload on form submit
       >
-        <div className="bg-background flex items-center p-2 rounded-xl">
+        <div className="form-control flex flex-row items-center bg-background p-2 rounded-xl">
           {/* Text Input */}
           <input
             type="text"
@@ -65,18 +67,30 @@ export default function Search({
             onChange={handleInputChange}
             value={searchInput}
             placeholder="Search by color name or code (e.g. LY7C or Nardo)"
-            className="bg-background w-64 h-12 p-4 text-sm placeholder:text-xs sm:w-[400px] md:text-base md:placeholder:text-sm border-none focus:outline-none"
+            className="input input-bordered bg-background text-sm placeholder:text-xs sm:w-[400px] md:text-base md:placeholder:text-sm w-64 h-12 focus:outline-none border-none"
           />
 
           {/* Search Button */}
-          <div
-            className="bg-primary flex items-center justify-center rounded-full w-10 h-10 ml-2 cursor-pointer hover:bg-opacity-80"
+          <button
+            type="button"
+            className=" bg-primary hover:bg-primary-focus rounded-full w-10 h-10 ml-2 flex items-center justify-center"
             onClick={handleSearch}
           >
-            <ArrowForward className="w-6 h-6" />
-          </div>
+            <ArrowForward className="w-6 h-6 text-white" />
+          </button>
         </div>
       </form>
+
+      <div className="flex w-full items-center pt-2 gap-2 md:mt-6">
+        <div className="flex w-full gap-2 mt-2">
+          <button className="button-primary outlined-button-primary btn">
+            Search By Make
+          </button>
+          <button className="button-secondary outlined-secondary btn">
+            Search By Make
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
