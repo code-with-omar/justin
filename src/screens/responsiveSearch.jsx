@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useModal } from "../contexts/Modal"; // Adjust the path to your ModalContext
+import { CloseIcon } from "../components/common/svgs";
 
 export const ResponsiveSearch = () => {
   const {
@@ -51,25 +52,25 @@ export const ResponsiveSearch = () => {
     /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
-    <div>
+    <div className="bg-white ">
       <div
-        className={`fixed z-50 bg-gray-800 text-white transition-transform duration-300 ${
+        className={`fixed z-50 bg-white text-black transition-transform duration-300 ${
           isOpen
             ? isDesktop
-              ? "translate-x-0" // Desktop: Slide in from right
-              : "translate-y-0" // Mobile: Slide in from bottom
+              ? "translate-x-0 rounded-tl-[3rem]" // Desktop: Slide in from right
+              : "translate-y-0 rounded-xl" // Mobile: Slide in from bottom
             : isDesktop
             ? "translate-x-full"
             : "translate-y-full"
         } md:bottom-auto md:top-0 md:right-0 md:w-[60%] w-full h-full md:h-screen flex flex-col`}
       >
         {/* Header */}
-        <div className="flex justify-between items-center p-4 bg-gray-700">
-          <h2 className="text-lg font-bold">
-            {step === "1" ? "Search for a Color" : `Step ${step}`}
-          </h2>
-          <button className="btn btn-sm btn-circle" onClick={closeModal}>
-            ✕
+        <div className="flex justify-between items-center p-5 pr-7 ">
+          <button
+            className="btn btn-circle btn-outline  ml-auto border-black hover:bg-white hover:border-black"
+            onClick={closeModal}
+          >
+            <CloseIcon />
           </button>
         </div>
 
@@ -81,18 +82,18 @@ export const ResponsiveSearch = () => {
                 type="text"
                 placeholder="Search by color name or code (e.g., LY7C or Nardo)"
                 className="input input-bordered w-full mb-4"
-                onChange={(e) => setHasSearchValue(!!e.target.value.trim())}
+                // onChange={(e) => setHasSearchValue(!!e.target.value.trim())}
               />
               <div className="flex gap-4">
                 <button
                   className="btn btn-accent w-1/2"
-                  onClick={() => setStep("2")}
+                  // onClick={() => setStep("2")}
                 >
                   Search By Make
                 </button>
                 <button
                   className="btn btn-outline w-1/2"
-                  onClick={() => alert("Search Tips")}
+                  // onClick={() => alert("Search Tips")}
                 >
                   Search Tips
                 </button>
@@ -104,21 +105,12 @@ export const ResponsiveSearch = () => {
               <h3 className="text-xl mb-4">Step 2: Select Make/Model</h3>
               <button
                 className="btn btn-primary w-full"
-                onClick={handleResultsBack}
+                // onClick={handleResultsBack}
               >
                 Back to Step 1
               </button>
             </div>
           )}
-        </div>
-
-        {/* Footer or Placeholder Items */}
-        <div className="bg-gray-700 p-4">
-          {[...Array(10)].map((_, idx) => (
-            <p key={idx} className="text-gray-400">
-              Lorem ipsum
-            </p>
-          ))}
         </div>
       </div>
 
