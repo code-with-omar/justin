@@ -23,8 +23,12 @@ export const ResponsiveSearch = () => {
   useEffect(() => {
     // Define the global openSearch function
     window.openSearch = (baseUrl = "") => {
-      openModal();
-      console.log("Search opened with base URL: ", baseUrl);
+      if (typeof openModal === "function") {
+        openModal();
+        console.log("Search opened with base URL: ", baseUrl);
+      } else {
+        console.error("openModal is not a function or not accessible.");
+      }
     };
 
     // Clean up the global function when the component unmounts
@@ -32,6 +36,19 @@ export const ResponsiveSearch = () => {
       delete window.openSearch;
     };
   }, [openModal]);
+
+  // useEffect(() => {
+  //   // Define the global openSearch function
+  //   window.openSearch = (baseUrl = "") => {
+  //     openModal();
+  //     console.log("Search opened with base URL: ", baseUrl);
+  //   };
+
+  //   // Clean up the global function when the component unmounts
+  //   return () => {
+  //     delete window.openSearch;
+  //   };
+  // }, [openModal]);
 
   const handleResultsBack = () => {
     if (isAdvSearch) {
