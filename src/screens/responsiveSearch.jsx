@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useModal } from "../contexts/Modal"; // Adjust the path to your ModalContext
 import { CloseIcon } from "../components/common/svgs";
+import Search from "./constants/search";
 
 export const ResponsiveSearch = () => {
   const {
@@ -76,41 +77,12 @@ export const ResponsiveSearch = () => {
 
         {/* Content */}
         <div className="flex-1 p-4">
-          {step === "1" && (
-            <>
-              <input
-                type="text"
-                placeholder="Search by color name or code (e.g., LY7C or Nardo)"
-                className="input input-bordered w-full mb-4"
-                // onChange={(e) => setHasSearchValue(!!e.target.value.trim())}
-              />
-              <div className="flex gap-4">
-                <button
-                  className="btn btn-accent w-1/2"
-                  // onClick={() => setStep("2")}
-                >
-                  Search By Make
-                </button>
-                <button
-                  className="btn btn-outline w-1/2"
-                  // onClick={() => alert("Search Tips")}
-                >
-                  Search Tips
-                </button>
-              </div>
-            </>
-          )}
-          {step === "2" && (
-            <div>
-              <h3 className="text-xl mb-4">Step 2: Select Make/Model</h3>
-              <button
-                className="btn btn-primary w-full"
-                // onClick={handleResultsBack}
-              >
-                Back to Step 1
-              </button>
-            </div>
-          )}
+          <Search
+            remove={remove}
+            setRemove={setRemove}
+            isAdvSearch={isAdvSearch}
+            setIsAdvSearch={setIsAdvSearch}
+          />
         </div>
       </div>
 
