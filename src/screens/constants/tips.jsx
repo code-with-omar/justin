@@ -1,45 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useModal } from "../contexts/Modal"; // Adjust the path to your ModalContext
-import { CloseIcon } from "../components/common/svgs";
-import Search from "./constants/search";
+import { useModal } from "../../contexts/Modal";
+import { CloseIcon } from "../../components/common/svgs";
+import Search from "../constants/search";
 
-export const ResponsiveSearch = () => {
-  const {
-    isOpen,
-    step,
-    isDesktop,
-    openModal,
-    closeModal,
-    setStep,
-    setShowInitialSearch,
-    setHasSearchValue,
-    isLoading,
-    setIsSidebarCollapsed,
-  } = useModal();
+export const Tips = () => {
+  const { isOpen, openModal, closeModal } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
   const [remove, setRemove] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
-
-  useEffect(() => {
-    // Define the global openSearch function
-    window.openSearch = (baseUrl = "") => {
-      openModal();
-      console.log("Search opened with base URL: ", baseUrl);
-    };
-
-    // Clean up the global function when the component unmounts
-    return () => {
-      delete window.openSearch;
-    };
-  }, [openModal]);
+  const [isMobile, setIsMobile] = useState(false); // Start with false, will be updated in useEffect
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 900);
+      setIsMobile(window.innerWidth < 900); // Update state on resize
     };
+
+    handleResize(); // Check the initial window width
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
   }, []);
 
   const modalStyle = {
@@ -68,7 +47,7 @@ export const ResponsiveSearch = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-[]">
       <div style={modalStyle}>
         {/* Visual indicator only for mobile */}
         {isMobile && isOpen && (
@@ -88,7 +67,7 @@ export const ResponsiveSearch = () => {
         )}
 
         {/* Content */}
-        <div className="flex-1">
+        <div className="flex-1 p-4">
           <Search
             remove={remove}
             setRemove={setRemove}

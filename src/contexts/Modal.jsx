@@ -9,6 +9,8 @@ export function ModalProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [stepsValue, setStepsValue] = useState({ brand: null, modelId: null });
+  const [resultCard, setResultCard] = useState("1");
+  const [searchStep, setSearchStep] = useState("1");
 
   // Tailwind utility for detecting screen size (use built-in classes for responsiveness)
   const isDesktop = window.innerWidth >= 768;
@@ -47,6 +49,10 @@ export function ModalProvider({ children }) {
     setHasSearchValue,
     setStepsValue,
     setIsSidebarCollapsed,
+    resultCard,
+    setResultCard,
+    searchStep,
+    setSearchStep,
   };
 
   return (
