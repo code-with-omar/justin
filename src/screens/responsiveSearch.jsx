@@ -129,22 +129,29 @@ export const ResponsiveSearch = () => {
         )}
 
         {isMobile && (step == "2" || step == "3") && (
-          <div className="flex justify-between items-center px-5">
+          // bg-[#F0EFF0]
+          <div className="flex justify-between items-center p-2 ">
             <button
-              className="btn btn-circle btn-outline border-black  hover:bg-white hover:border-black"
+              className="rounded-full w-10 h-10 border flex justify-center items-center border-black hover:bg-white hover:border-black"
               onClick={handleAllStep} // Ensure it doesn't go below 1
             >
               <ArrowBack />
             </button>
             {(step == "2" || step == "3") && (
-              <h4 className="text-[#343434]  font-extrabold text-xl  uppercase">
+              <h4 className="text-[#343434]  font-extrabold text-base sm:text-xl  uppercase text-center">
                 SEARCH FOR YOUR
-                <span className="text-[#1cbcba] text-xl font-extrabold">
+                <span className="text-[#1cbcba] text-base sm:text-xl font-extrabold">
                   {" "}
                   COLOR
                 </span>
               </h4>
             )}
+            <button
+              className="rounded-full w-10 h-10 border flex justify-center items-center border-black hover:bg-white hover:border-black"
+              onClick={closeModal}
+            >
+              <CloseIcon />
+            </button>
           </div>
         )}
 

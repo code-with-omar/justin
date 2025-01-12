@@ -29,6 +29,8 @@ export default function Search({
   const [isSearching, setIsSearching] = useState(false); // Track if search is in progress
   const [resultsLoader, setResultsLoader] = useState(false);
   const [showInitialSearch, setShowInitialSearch] = useState(true);
+  const [advSearchResults, setAdvSearchResults] = useState();
+
   const {
     step,
     setIsLoading,
@@ -188,7 +190,7 @@ export default function Search({
           name="q"
           id="query"
           placeholder="Search by color name or code (e.g. LY7C or Nardo)"
-          className="input input-bordered bg-background text-sm placeholder:text-xs sm:w-[400px] md:text-base md:placeholder:text-sm w-64 h-12 focus:outline-none border-none"
+          className="input input-bordered bg-background text-sm placeholder:text-[8px] sm:placeholder:text-sm sm:w-[400px] md:text-base md:placeholder:text-sm w-64 h-12 focus:outline-none border-none"
           ref={searchInputRef}
         />
 
@@ -203,7 +205,7 @@ export default function Search({
   );
   const buttonPrimary = (
     <button
-      className="btn rounded-full bg-[#0d1120] text-white py-2 font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-sm md:text-base w-1/2"
+      className="btn rounded-full bg-[#0d1120] text-white  font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-[12px] md:text-base w-1/2"
       onClick={() => setInitialAdvance(true)}
     >
       Search By Make
@@ -211,7 +213,7 @@ export default function Search({
   );
   const buttonSecondary = (
     <button
-      className="btn rounded-full bg-white text-[#0d1120] py-2 font-normal capitalize border border-black w-1/2 hover:bg-[#1cbcba] hover:text-white hover:border-[#1cbcba] text-sm md:text-base"
+      className="btn rounded-full bg-white text-[#0d1120]  font-normal capitalize border border-black w-1/2 hover:bg-[#1cbcba] hover:text-white hover:border-[#1cbcba] text-[12px] sm:text-base"
       onClick={toggleTipsDrawer}
     >
       Search Tips
@@ -225,11 +227,11 @@ export default function Search({
   );
   // <div className="relative flex flex-col justify-center items-center border-0 overflow-x-hidden overflow-y-scroll p-0 w-full h-full md:border-0 md:overflow-y-hidden xl:flex-col">
   return (
-    <div className="parentWrapper ">
+    <div className="parentWrapper">
       {/* Show loader during search submission */}
       {isSearching ? (
         <div>
-          <div className="-top-full">
+          <div className="top-full">
             {title}
             {formComponent}
             <div className="flex items-center pt-3 gap-2 md:mt-6 w-64 justify-between mx-auto sm:w-[400px]">
@@ -239,14 +241,14 @@ export default function Search({
             <Loader />
           </div>
         </div>
-      ) : (step == "2" || step == "3") &&
+      ) : (step === "2" || step === "3") &&
         searchResults &&
         !initialAdvance &&
         searchResults.length > 0 ? (
-        <div className="absolute  w-full">
+        <div className="absolute w-full">
           <div className="flex justify-between items-center pl-7"></div>
-          <div className="">
-            {!isLoading && !isSearchResultsFetching && resultCard == "1" && (
+          <div>
+            {!isLoading && !isSearchResultsFetching && resultCard === "1" && (
               <SearchResults
                 className="h-[calc(100vh-22rem)]"
                 isFetching={isLoading}
@@ -285,24 +287,69 @@ export default function Search({
           </div>
         </div>
       ) : initialAdvance ? (
-        (!isSearchResultsFetching &&
-          ["1", "2"].includes(advanceStep) &&
-          advanceStep === "1" && <SelectBrand />) ||
-        (advanceStep === "2" && <SelectModel />) ||
-        (advanceStep === "3" && <ColorsType />)
+        advanceStep === "1" ? (
+          <SelectBrand />
+        ) : advanceStep === "2" ? (
+          <SelectModel />
+        ) : advanceStep === "3" ? (
+          <ColorsType setAdvanceSearch={setAdvSearchResults} />
+        ) : (
+          advanceStep === "4" &&
+          (step === "2" || step === "3") &&
+          searchResults && (
+            <div className="absolute w-full">
+              <div className="flex justify-between items-center pl-7"></div>
+              <div>
+                {!isLoading &&
+                  !isSearchResultsFetching &&
+                  resultCard === "1" && (
+                    <SearchResults
+                      className="h-[calc(100vh-22rem)]"
+                      isFetching={isLoading}
+                      imageQueries={imageQueries}
+                      data={advSearchResults}
+                      onColorClick={onColorClick}
+                      searchQuery={searchTerms}
+                      setResultsLoading={setResultsLoader}
+                      setSearchTerms={setSearchTerms}
+                      setShowInitialSearch={setShowInitialSearch}
+                      recipeData={recipeData}
+                      searchBy={searchBy}
+                      resultsLoader={resultsLoader}
+                      form={formComponent}
+                      title={title}
+                      buttonPrimary={buttonPrimary}
+                      buttonSecondary={buttonSecondary}
+                    />
+                  )}
+                {isRecipeLoading || isRecipeFetching || resultsLoader ? (
+                  <Loader />
+                ) : (
+                  !isRecipeError &&
+                  resultCard === "2" && (
+                    <ConfirmColor
+                      selectedColor={selectedColor}
+                      onRecipeClick={onRecipeClick}
+                      getColorImage={getColorImage}
+                      recipeData={recipeData}
+                      imageQueries={imageQueries}
+                      getUndercoatImg={getUndercoatImg}
+                      setRemove={setRemove}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          )
+        )
       ) : (
         <div className="flex items-center justify-center pt-[18%] md:pt-[10%]">
-          <div className="flex flex-col justify-center items-center pt-3 gap-2 md:mt-6  mx-auto sm:w-[400px]">
+          <div className="flex flex-col justify-center items-center pt-3 gap-2 md:mt-6 mx-auto sm:w-[400px]">
             <img className="w-56" src={Logo} alt="Logo" />
             {title}
             {formComponent}
             <div className="flex items-center pt-3 gap-2 md:mt-6 w-full justify-between">
-              <button
-                className="btn rounded-full bg-[#0d1120] text-white py-2 font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-sm md:text-base w-1/2 "
-                onClick={() => setInitialAdvance(true)}
-              >
-                Search By Make
-              </button>
+              {buttonPrimary}
               {buttonSecondary}
             </div>
           </div>

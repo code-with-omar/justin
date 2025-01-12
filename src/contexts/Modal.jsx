@@ -29,6 +29,8 @@ export function ModalProvider({ children }) {
     setIsOpen(false);
     setIsSidebarCollapsed(false);
     setInitialAdvance(false);
+
+    setAdvanceStep("1");
     setTimeout(() => {
       document.body.style.overflow = "auto";
       document.body.style.paddingRight = "initial";

@@ -3,7 +3,6 @@ import { useModal } from "../../contexts/Modal";
 import { useModels } from "./useSteps";
 
 export default function SelectModel() {
-  console.log("hello");
   const {
     setStep,
     stepsValue,

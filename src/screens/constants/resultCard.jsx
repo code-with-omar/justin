@@ -11,8 +11,8 @@ export default function ResultCard({
 
   return (
     <div
-      className="card cursor-pointer p-2 border-solid border-[#e5e7eb] border-2 rounded-xl "
-      onClick={onClick} // Use handleClick here
+      className="card cursor-pointer p-[6px] border-solid  border-2 rounded-xl border-[#0D1120] bg-[#FFF] hover:border-[#1cbcba] border-opacity-40 "
+      onClick={onClick}
     >
       <figure
         style={{
@@ -21,10 +21,10 @@ export default function ResultCard({
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-        className="card-figure h-40 w-full rounded-xl"
+        className="card-figure h-[120px] w-full rounded-xl bg-gradient-to-b from-transparent to-[#ffffff]"
       />
       <div className="my-3">
-        <h6 className="text-xs font-semibold leading-4 my-2">
+        <h6 className="text-xs font-semibold leading-4 my-2 truncate">
           {color_code} / {color_name}
         </h6>
         <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center">

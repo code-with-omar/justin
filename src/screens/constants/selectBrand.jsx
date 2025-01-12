@@ -6,7 +6,7 @@ export default function SelectBrand() {
   const { setStepsValue, setIsLoading, setAdvanceStep, advanceStep } =
     useModal();
   const { data: brandsData, isFetching: brandsFetching } = useBrands();
-  console.log(brandsData);
+
   const [searchTerm, setSearchTerm] = useState("");
   const handleBrand = (brand) => {
     console.log(advanceStep);

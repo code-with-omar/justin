@@ -75,24 +75,22 @@ export default function SearchResults({
     };
   }, []);
   return (
-    <div
-      className={`mt-8 w-full ${isMobile ? "overflow-y-auto h-screen" : ""}`}
-    >
+    <div className={`w-full ${isMobile ? "overflow-y-auto h-[80vh]" : ""}`}>
       <div className="">
         {step == "1" && { title }}
 
-        {form}
-        <div className="flex justify-between mt-4 px-8 gap-4">
+        <div className="mt-0 sm:mt-5">{form}</div>
+        <div className="flex justify-between mt-4 px-[10%] sm:px-32 gap-4">
           {buttonPrimary}
           {buttonSecondary}
         </div>
       </div>
       <div
-        className={`mt-8 p-0 w-full bg-background ${
+        className={`mt-4 sm:mt-8  p-4 w-full bg-background ${
           isMobile ? "" : "overflow-y-auto h-screen"
         }`}
       >
-        <div className="p-4 gap-x-4 gap-y-6 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mt-8 mb-10 ">
+        <div className="p-4 gap-x-4 gap-y-6 grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  mb-10">
           {data?.map((color, index) => (
             <ResultCard
               key={index}
