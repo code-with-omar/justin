@@ -1,10 +1,23 @@
+import React from "react";
 
-
-export default function Loader() {
+const Loader = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-full">
-      <div className="loader border-4 border-t-primary border-gray-200 rounded-full w-12 h-12 animate-spin"></div>
-      <p className="text-center text-gray-600 mt-4">Loading...</p>
+    <div className="fixed bottom-[13%] sm:bottom-[0%] left-0 w-full h-2 bg-black">
+      <div
+        className="h-full bg-red-500 animate-[load_3s_infinite]"
+        style={{ animationTimingFunction: "linear" }}
+      ></div>
+      <style>
+        {`
+          @keyframes load {
+            0% { width: 0%; }
+            50% { width: 50%; }
+            100% { width: 100%; }
+          }
+        `}
+      </style>
     </div>
   );
-}
+};
+
+export default Loader;

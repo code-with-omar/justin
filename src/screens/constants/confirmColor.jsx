@@ -78,7 +78,6 @@ export default function ConfirmColor({
           <h2> Your Selected Color:</h2>
           <h1>hello i am</h1>
           <SelectedColorCard
-            className="cc-w-full cc-rounded-lg cc-border cc-border-gray-300 cc-bg-white cc-shadow"
             onClick={onRecipeClick}
             imageurl={getColorImage(selectedColor)}
             color_code={selectedColor.code || ""}
@@ -91,7 +90,6 @@ export default function ConfirmColor({
         <div>
           <div>
             <SelectedColorCard
-              className="cc-w-full cc-rounded-lg cc-border cc-border-gray-300 cc-bg-white cc-shadow"
               onClick={onRecipeClick}
               imageurl={getColorImage(selectedColor)}
               color_code={selectedColor.code || ""}

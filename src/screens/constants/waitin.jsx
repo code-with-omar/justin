@@ -9,9 +9,6 @@ import { useShopifyCreateProduct } from "../../hooks/useShopifyCreateProduct";
 import Loader from "../../components/common/loader/loader";
 import SearchResults from "./searchResults";
 import ConfirmColor from "./confirmColor";
-import SelectBrand from "./selectBrand";
-import SelectModel from "./selectModel";
-import { ColorsType } from "./colorType";
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
@@ -47,10 +44,6 @@ export default function Search({
     searchStep,
     setSearchStep,
     setSearchClik,
-    initialAdvance,
-    setInitialAdvance,
-    advanceStep,
-    setAdvanceStep,
   } = useModal();
 
   const searchInputRef = useRef();
@@ -66,7 +59,6 @@ export default function Search({
       // Update searchTerms state and set isSearching to true
       setSearchTerms(searchInput);
       setIsSearching(true);
-      setInitialAdvance(false);
     }
   };
 
@@ -202,10 +194,7 @@ export default function Search({
     </form>
   );
   const buttonPrimary = (
-    <button
-      className="btn rounded-full bg-[#0d1120] text-white py-2 font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-sm md:text-base w-1/2"
-      onClick={() => setInitialAdvance(true)}
-    >
+    <button className="btn rounded-full bg-[#0d1120] text-white py-2 font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-sm md:text-base w-1/2">
       Search By Make
     </button>
   );
@@ -241,10 +230,10 @@ export default function Search({
         </div>
       ) : (step == "2" || step == "3") &&
         searchResults &&
-        !initialAdvance &&
         searchResults.length > 0 ? (
         <div className="absolute  w-full">
           <div className="flex justify-between items-center pl-7"></div>
+
           <div className="">
             {!isLoading && !isSearchResultsFetching && resultCard == "1" && (
               <SearchResults
@@ -284,12 +273,6 @@ export default function Search({
             )}
           </div>
         </div>
-      ) : initialAdvance ? (
-        (!isSearchResultsFetching &&
-          ["1", "2"].includes(advanceStep) &&
-          advanceStep === "1" && <SelectBrand />) ||
-        (advanceStep === "2" && <SelectModel />) ||
-        (advanceStep === "3" && <ColorsType />)
       ) : (
         <div className="flex items-center justify-center pt-[18%] md:pt-[10%]">
           <div className="flex flex-col justify-center items-center pt-3 gap-2 md:mt-6  mx-auto sm:w-[400px]">
@@ -297,12 +280,7 @@ export default function Search({
             {title}
             {formComponent}
             <div className="flex items-center pt-3 gap-2 md:mt-6 w-full justify-between">
-              <button
-                className="btn rounded-full bg-[#0d1120] text-white py-2 font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-sm md:text-base w-1/2 "
-                onClick={() => setInitialAdvance(true)}
-              >
-                Search By Make
-              </button>
+              {buttonPrimary}
               {buttonSecondary}
             </div>
           </div>

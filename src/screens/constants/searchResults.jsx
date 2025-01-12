@@ -79,7 +79,8 @@ export default function SearchResults({
       className={`mt-8 w-full ${isMobile ? "overflow-y-auto h-screen" : ""}`}
     >
       <div className="">
-        {title}
+        {step == "1" && { title }}
+
         {form}
         <div className="flex justify-between mt-4 px-8 gap-4">
           {buttonPrimary}

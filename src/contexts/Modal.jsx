@@ -11,7 +11,8 @@ export function ModalProvider({ children }) {
   const [stepsValue, setStepsValue] = useState({ brand: null, modelId: null });
   const [resultCard, setResultCard] = useState("1");
   const [searchStep, setSearchStep] = useState("1");
-
+  const [initialAdvance, setInitialAdvance] = useState(false);
+  const [advanceStep, setAdvanceStep] = useState("1");
   // Tailwind utility for detecting screen size (use built-in classes for responsiveness)
   const isDesktop = window.innerWidth >= 768;
 
@@ -27,6 +28,7 @@ export function ModalProvider({ children }) {
     setIsLoading(false);
     setIsOpen(false);
     setIsSidebarCollapsed(false);
+    setInitialAdvance(false);
     setTimeout(() => {
       document.body.style.overflow = "auto";
       document.body.style.paddingRight = "initial";
@@ -53,6 +55,10 @@ export function ModalProvider({ children }) {
     setResultCard,
     searchStep,
     setSearchStep,
+    initialAdvance,
+    setInitialAdvance,
+    advanceStep,
+    setAdvanceStep,
   };
 
   return (

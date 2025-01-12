@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useModal } from "../contexts/Modal"; // Adjust the path to your ModalContext
-import { CloseIcon } from "../components/common/svgs";
+import { CloseIcon, ArrowBack } from "../components/common/svgs";
 import Search from "./constants/search";
-
 export const ResponsiveSearch = () => {
   const {
     isOpen,
@@ -15,6 +14,10 @@ export const ResponsiveSearch = () => {
     setHasSearchValue,
     isLoading,
     setIsSidebarCollapsed,
+    resultCard,
+    setResultCard,
+    searchStep,
+    setSearchStep,
   } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
@@ -36,9 +39,17 @@ export const ResponsiveSearch = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 900);
+      const width = window.innerWidth;
+      setIsMobile(width < 900);
     };
+
+    // Call the function initially to set the state based on the current width
+    handleResize();
+
+    // Add the resize event listener
     window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -67,6 +78,18 @@ export const ResponsiveSearch = () => {
     borderTopRightRadius: isOpen && isMobile ? "1rem" : "0", // Same as above for top right
   };
 
+  const handleAllStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+    if (resultCard == 2) {
+      setResultCard(resultCard - 1);
+    }
+    if (searchStep == 2) {
+      setSearchStep(searchStep - 1);
+    }
+  };
+
   return (
     <div className="bg-white">
       <div style={modalStyle}>
@@ -78,12 +101,50 @@ export const ResponsiveSearch = () => {
         {/* Header: Visible only on desktop */}
         {!isMobile && (
           <div className="flex justify-between items-center p-5 pr-7">
+            {(step == "2" || step == "3") && (
+              <button
+                className="btn btn-circle btn-outline border-black hover:bg-white hover:border-black"
+                onClick={handleAllStep} // Ensure it doesn't go below 1
+              >
+                <ArrowBack />
+              </button>
+            )}
+            {(step == "2" || step == "3") && (
+              <h4 className="text-[#343434] text-center font-extrabold text-xl flex-1 uppercase">
+                SEARCH FOR YOUR
+                <span className="text-[#1cbcba] text-xl font-extrabold">
+                  {" "}
+                  COLOR
+                </span>
+              </h4>
+            )}
+
             <button
               className="btn btn-circle btn-outline ml-auto border-black hover:bg-white hover:border-black"
               onClick={closeModal}
             >
               <CloseIcon />
             </button>
+          </div>
+        )}
+
+        {isMobile && (step == "2" || step == "3") && (
+          <div className="flex justify-between items-center px-5">
+            <button
+              className="btn btn-circle btn-outline border-black  hover:bg-white hover:border-black"
+              onClick={handleAllStep} // Ensure it doesn't go below 1
+            >
+              <ArrowBack />
+            </button>
+            {(step == "2" || step == "3") && (
+              <h4 className="text-[#343434]  font-extrabold text-xl  uppercase">
+                SEARCH FOR YOUR
+                <span className="text-[#1cbcba] text-xl font-extrabold">
+                  {" "}
+                  COLOR
+                </span>
+              </h4>
+            )}
           </div>
         )}
 

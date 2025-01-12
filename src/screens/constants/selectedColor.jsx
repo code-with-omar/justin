@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Check, TickIcon } from "../../../src/components/common/svgs/index";
 import gallonLarge from "../../assets/gallon-one.png";
 import gallonMedium from "../../assets/gallon-two.png";
@@ -13,7 +13,18 @@ const SelectedColorCard = ({
   onClick,
   variant,
 }) => {
-  console.log(imageurl);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth >= 600);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth >= 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const isColorCode =
     /^#[0-9A-F]{6}$/i.test(imageurl) || /^rgb/i.test(imageurl);
   return (
@@ -58,46 +69,47 @@ const SelectedColorCard = ({
             </button>
           </div>
         </div>
-
-        <div className="invisible sm:visible  sm:w-1/2 sm:border sm:rounded-xl sm:p-4">
-          <div className="sm:flex-row sm:text-center">
-            <h2 className="text-[#000] font-bold">Available Sizes:</h2>
-            <span className="text-[12px]">
-              4oz | Aerosols | Pints | Quarts | Gallons
-            </span>
-          </div>
-          <div className="w-0 sm:w-auto">
-            <div className="flex sm:items-baseline sm:justify-center">
-              {/* Gallon */}
-              <div className="flex flex-col items-center">
-                <img
-                  src={gallonLarge}
-                  alt="Gallon"
-                  className="h-[150px] w-full object-contain"
-                />
-                <span className="text-sm font-bold">Gallon</span>
-              </div>
-              {/* Quart */}
-              <div className="flex flex-col items-center">
-                <img
-                  src={gallonMedium}
-                  alt="Quart"
-                  className="h-[120px] w-full object-contain"
-                />
-                <span className="text-sm font-bold">Quart</span>
-              </div>
-              {/* Pint */}
-              <div className="flex flex-col items-center">
-                <img
-                  src={gallonSmall}
-                  alt="Pint"
-                  className="h-20 w-full object-contain"
-                />
-                <span className="text-sm font-bold">Pint</span>
+        {isSmallScreen && (
+          <div className="invisible sm:visible  sm:w-1/2 sm:border sm:rounded-xl sm:p-4">
+            <div className="sm:flex-row sm:text-center">
+              <h2 className="text-[#000] font-bold">Available Sizes:</h2>
+              <span className="text-[12px]">
+                4oz | Aerosols | Pints | Quarts | Gallons
+              </span>
+            </div>
+            <div className="w-0 sm:w-auto">
+              <div className="flex sm:items-baseline sm:justify-center">
+                {/* Gallon */}
+                <div className="flex flex-col items-center">
+                  <img
+                    src={gallonLarge}
+                    alt="Gallon"
+                    className="h-[150px] w-full object-contain"
+                  />
+                  <span className="text-sm font-bold">Gallon</span>
+                </div>
+                {/* Quart */}
+                <div className="flex flex-col items-center">
+                  <img
+                    src={gallonMedium}
+                    alt="Quart"
+                    className="h-[120px] w-full object-contain"
+                  />
+                  <span className="text-sm font-bold">Quart</span>
+                </div>
+                {/* Pint */}
+                <div className="flex flex-col items-center">
+                  <img
+                    src={gallonSmall}
+                    alt="Pint"
+                    className="h-20 w-full object-contain"
+                  />
+                  <span className="text-sm font-bold">Pint</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
