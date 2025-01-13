@@ -27,7 +27,7 @@ export default function SelectBrand() {
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <div className=" p-5 overflow-y-auto xl:my-10 h-[80vh] md:h-[83vh] mt-2 sm:mt-5 bg-background">
+    <div className=" p-5 overflow-y-auto xl:my-10 h-[72vh] md:h-[80vh] mt-2 sm:mt-5 bg-background">
       <div className="grid gap-6 grid-cols-1 overflow-y-auto px-4">
         <input
           type="text"

@@ -58,7 +58,7 @@ export const ColorsType = ({ setAdvanceSearch }) => {
 
   return (
     <div className="p-4 xl:p-10 xl:flex xl:flex-col xl:w-full">
-      <div className="pb-2 px-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 overflow-y-auto max-h-[65vh] scroll-bar">
+      <div className="pb-2 px-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 overflow-y-auto h-[65vh] scroll-bar">
         {enhancedColorsData?.map((tile, index) => (
           <div
             key={index}
@@ -66,19 +66,19 @@ export const ColorsType = ({ setAdvanceSearch }) => {
             onClick={() => handleSeletedColor(tile.rgb)}
           >
             <figure
-              className="flex m-auto rounded-lg h-[120px] md:h-[150px] xl:shrink-0 w-full overflow-hidden "
+              className="flex m-auto h-[120px] md:h-[150px] xl:shrink-0 w-full overflow-hidden p-2 "
               onClick={handleColor}
             >
               {tile.image ? (
                 <img
                   src={tile.image}
                   alt={tile.name || "Color option"}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-xl-"
                 />
               ) : tile.rgb ? (
                 <div
                   style={{ backgroundColor: `rgb(${tile.rgb})` }}
-                  className="w-full h-full"
+                  className="w-full h-full rounded-xl"
                 />
               ) : null}
             </figure>
