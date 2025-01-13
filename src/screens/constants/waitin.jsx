@@ -1,127 +1,63 @@
-<div className="parentWrapper">
-  {/* Show loader during search submission */}
-  {isSearching ? (
-    <div>
-      <div className="top-full">
-        {title}
-        {formComponent}
-        <div className="flex items-center pt-3 gap-2 md:mt-6 w-64 justify-between mx-auto sm:w-[400px]">
-          {buttonPrimary}
-          {buttonSecondary}
-        </div>
-        <Loader />
-      </div>
-    </div>
-  ) : (step === "2" || step === "3") &&
-    searchResults &&
-    !initialAdvance &&
-    searchResults.length > 0 ? (
-    <div className="absolute w-full">
-      <div className="flex justify-between items-center pl-7"></div>
-      <div>
-        {!isLoading && !isSearchResultsFetching && resultCard === "1" && (
-          <SearchResults
-            className="h-[calc(100vh-22rem)]"
-            isFetching={isLoading}
-            imageQueries={imageQueries}
-            data={searchResults}
-            onColorClick={onColorClick}
-            searchQuery={searchTerms}
-            setResultsLoading={setResultsLoader}
-            setSearchTerms={setSearchTerms}
-            setShowInitialSearch={setShowInitialSearch}
-            recipeData={recipeData}
-            searchBy={searchBy}
-            resultsLoader={resultsLoader}
-            form={formComponent}
-            title={title}
-            buttonPrimary={buttonPrimary}
-            buttonSecondary={buttonSecondary}
-          />
-        )}
-        {isRecipeLoading || isRecipeFetching || resultsLoader ? (
-          <Loader />
-        ) : (
-          !isRecipeError &&
-          resultCard === "2" && (
-            <ConfirmColor
-              selectedColor={selectedColor}
-              onRecipeClick={onRecipeClick}
-              getColorImage={getColorImage}
-              recipeData={recipeData}
-              imageQueries={imageQueries}
-              getUndercoatImg={getUndercoatImg}
-              setRemove={setRemove}
-            />
-          )
-        )}
-      </div>
-    </div>
-  ) : initialAdvance ? (
-    advanceStep === "1" ? (
-      <SelectBrand />
-    ) : advanceStep === "2" ? (
-      <SelectModel />
-    ) : advanceStep === "3" ? (
-      <ColorsType setAdvanceSearch={setAdvSearchResults} />
-    ) : (
-      advanceStep === "4" &&
-      (step === "2" || step === "3") &&
-      searchResults && (
-        <div className="absolute w-full">
-          <div className="flex justify-between items-center pl-7"></div>
-          <div>
-            {!isLoading && !isSearchResultsFetching && resultCard === "1" && (
-              <SearchResults
-                className="h-[calc(100vh-22rem)]"
-                isFetching={isLoading}
-                imageQueries={imageQueries}
-                data={advSearchResults}
-                onColorClick={onColorClick}
-                searchQuery={searchTerms}
-                setResultsLoading={setResultsLoader}
-                setSearchTerms={setSearchTerms}
-                setShowInitialSearch={setShowInitialSearch}
-                recipeData={recipeData}
-                searchBy={searchBy}
-                resultsLoader={resultsLoader}
-                form={formComponent}
-                title={title}
-                buttonPrimary={buttonPrimary}
-                buttonSecondary={buttonSecondary}
+<div className="py-6 flex justify-center flex-col px-5">
+  <div className="flex items-center space-x-6 w-full justify-center">
+    {advancedWrapStep.map((label, index) => (
+      <div key={label} className="flex items-center justify-between space-x-2">
+        {/* Step Circle */}
+        <div
+          className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${
+            index < advanceStep
+              ? "bg-blue-600" // Completed step
+              : index === advanceStep
+              ? "bg-blue-900" // Active step
+              : "bg-gray-200 text-gray-400" // Future step
+          }`}
+        >
+          {index < advanceStep ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
               />
-            )}
-            {isRecipeLoading || isRecipeFetching || resultsLoader ? (
-              <Loader />
-            ) : (
-              !isRecipeError &&
-              resultCard === "2" && (
-                <ConfirmColor
-                  selectedColor={selectedColor}
-                  onRecipeClick={onRecipeClick}
-                  getColorImage={getColorImage}
-                  recipeData={recipeData}
-                  imageQueries={imageQueries}
-                  getUndercoatImg={getUndercoatImg}
-                  setRemove={setRemove}
-                />
-              )
-            )}
-          </div>
+            </svg>
+          ) : (
+            index + 1
+          )}
         </div>
-      )
-    )
-  ) : (
-    <div className="flex items-center justify-center pt-[18%] md:pt-[10%]">
-      <div className="flex flex-col justify-center items-center pt-3 gap-2 md:mt-6 mx-auto sm:w-[400px]">
-        <img className="w-56" src={Logo} alt="Logo" />
-        {title}
-        {formComponent}
-        <div className="flex items-center pt-3 gap-2 md:mt-6 w-full justify-between">
-          {buttonPrimary}
-          {buttonSecondary}
-        </div>
+        {/* Connector Line */}
+        {index !== advancedWrapStep.length - 1 && (
+          <div
+            className={`h-0.5 flex-grow ${
+              index < advanceStep
+                ? "bg-blue-900" // Line for completed steps
+                : "bg-gray-200" // Line for future steps
+            }`}
+          ></div>
+        )}
       </div>
-    </div>
-  )}
+    ))}
+  </div>
+  <div className="flex justify-between mt-4 text-sm font-medium">
+    {advancedWrapStep.map((label, index) => (
+      <span
+        key={label}
+        className={`${
+          index === advanceStep
+            ? "text-blue-900 font-bold" // Active step text
+            : index < advanceStep
+            ? "text-black" // Completed step text
+            : "text-gray-400" // Future step text
+        }`}
+      >
+        {label}
+      </span>
+    ))}
+  </div>
 </div>;

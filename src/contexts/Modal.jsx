@@ -14,6 +14,7 @@ export function ModalProvider({ children }) {
   const [initialAdvance, setInitialAdvance] = useState(false);
   const [advanceStep, setAdvanceStep] = useState("1");
   const [isSearching, setIsSearching] = useState(false);
+  const [advanceBack, setAdvanceBack] = useState("1");
   // Tailwind utility for detecting screen size (use built-in classes for responsiveness)
 
   function openModal() {
@@ -61,6 +62,8 @@ export function ModalProvider({ children }) {
     setAdvanceStep,
     isSearching,
     setIsSearching,
+    advanceBack,
+    setAdvanceBack,
   };
 
   return (

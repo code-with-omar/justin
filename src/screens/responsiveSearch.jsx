@@ -109,7 +109,7 @@ export const ResponsiveSearch = () => {
                 <ArrowBack />
               </button>
             )}
-            {(step == "2" || step == "3") && (
+            {step == "2" && (
               <h4 className="text-[#343434] text-center font-extrabold text-xl flex-1 uppercase">
                 SEARCH FOR YOUR
                 <span className="text-[#1cbcba] text-xl font-extrabold">
@@ -118,7 +118,15 @@ export const ResponsiveSearch = () => {
                 </span>
               </h4>
             )}
-
+            {step == "3" && (
+              <h4 className="text-[#343434] text-center font-extrabold text-xl flex-1 uppercase">
+                comfrim YOUR
+                <span className="text-[#1cbcba] text-xl font-extrabold">
+                  {" "}
+                  COLOR
+                </span>
+              </h4>
+            )}
             <button
               className="btn btn-circle btn-outline ml-auto border-black hover:bg-white hover:border-black"
               onClick={closeModal}
@@ -137,9 +145,18 @@ export const ResponsiveSearch = () => {
             >
               <ArrowBack />
             </button>
-            {(step == "2" || step == "3") && (
+            {step == "2" && (
               <h4 className="text-[#343434]  font-extrabold text-base sm:text-xl  uppercase text-center">
                 SEARCH FOR YOUR
+                <span className="text-[#1cbcba] text-base sm:text-xl font-extrabold">
+                  {" "}
+                  COLOR
+                </span>
+              </h4>
+            )}
+            {step == "3" && (
+              <h4 className="text-[#343434]  font-extrabold text-base sm:text-xl  uppercase text-center">
+                confrim YOUR
                 <span className="text-[#1cbcba] text-base sm:text-xl font-extrabold">
                   {" "}
                   COLOR

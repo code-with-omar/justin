@@ -32,26 +32,29 @@ export default function SelectModel() {
     model.type.toLowerCase().includes(searchTerms.toLowerCase())
   );
   return (
-    <div className="p-4 xl:p-10 xl:flex xl:flex-col xl:w-full">
-      <div className="grid gap-6 grid-cols-1 md:overflow-y-auto xl:my-10 max-h-[60vh] px-4 scrollbar">
+    <div className="p-5 overflow-y-auto xl:my-10 h-[80vh] md:h-[83vh] mt-2 sm:mt-5 bg-background">
+      <div className="grid gap-6 grid-cols-1 overflow-y-auto xl:my-10 max-h-[60vh]  scrollbar">
         <input
           type="text"
+          placeholder="Quick Search"
           onChange={(e) => setSearchTerms(e.target.value)}
           value={searchTerms}
+          className="input input-bordered w-full bg-[#e5e7eb]"
         />
       </div>
-      <div className="grid gap-6 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:overflow-y-auto xl:my-10 max-h-[60vh] px-4 scrollbar">
+
+      <div className="grid gap-6 grid-cols-2 mt-2 sm:mt-4 md:grid-cols-3 xl:grid-cols-4 ">
         {filterdModels?.map((model, index) => (
           <div
             key={index}
-            className="p-2 cursor-pointer border border-secondary bg-white rounded-xl space-y-3"
+            className="p-2 cursor-pointer border border-secondary bg-white rounded-xl flex items-center"
             onClick={() => handleModal(model.id)}
           >
             {/* <div className="flex justify-center">
               <img src={model.image} className="object-contain rounded-xl" alt={model.id} />
             </div> */}
-            <div className="px-1 pb-1 space-y-3">
-              <p className="xl:text-lg font-semibold">{model.type}</p>
+            <div className="px-1 pb-1 ">
+              <p className="text-sm xl:text-lg font-semibold">{model.type}</p>
             </div>
           </div>
         ))}

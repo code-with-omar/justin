@@ -12,6 +12,8 @@ import ConfirmColor from "./confirmColor";
 import SelectBrand from "./selectBrand";
 import SelectModel from "./selectModel";
 import { ColorsType } from "./colorType";
+import AdvanceStepWrap from "./advanceStepWrap";
+const advancedWrapStep = ["Select Make", "Select Model", "Select Color"];
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
@@ -270,61 +272,63 @@ export default function Search({ setRemove, ...rest }) {
           </div>
         </div>
       ) : initialAdvance ? (
-        advanceStep === "1" ? (
-          <SelectBrand />
-        ) : advanceStep === "2" ? (
-          <SelectModel />
-        ) : advanceStep === "3" ? (
-          <ColorsType setAdvanceSearch={setAdvSearchResults} />
-        ) : (
-          advanceStep === "4" &&
-          (step === "2" || step === "3") &&
-          searchResults && (
-            <div className="absolute w-full">
-              <div className="flex justify-between items-center pl-7"></div>
-              <div>
-                {!isLoading &&
-                  !isSearchResultsFetching &&
-                  resultCard === "1" && (
-                    <SearchResults
-                      className="h-[calc(100vh-22rem)]"
-                      isFetching={isLoading}
-                      imageQueries={imageQueries}
-                      data={advSearchResults}
-                      onColorClick={onColorClick}
-                      searchQuery={searchTerms}
-                      setResultsLoading={setResultsLoader}
-                      setSearchTerms={setSearchTerms}
-                      setShowInitialSearch={setShowInitialSearch}
-                      recipeData={recipeData}
-                      searchBy={searchBy}
-                      resultsLoader={resultsLoader}
-                      form={formComponent}
-                      title={title}
-                      buttonPrimary={buttonPrimary}
-                      buttonSecondary={buttonSecondary}
-                    />
+        <div className="w-full">
+          {advanceStep === "1" ? (
+            <SelectBrand />
+          ) : advanceStep === "2" ? (
+            <SelectModel />
+          ) : advanceStep === "3" ? (
+            <ColorsType setAdvanceSearch={setAdvSearchResults} />
+          ) : (
+            advanceStep === "4" &&
+            (step === "2" || step === "3") &&
+            searchResults && (
+              <div className="absolute w-full">
+                <div className="flex justify-between items-center pl-7"></div>
+                <div>
+                  {!isLoading &&
+                    !isSearchResultsFetching &&
+                    resultCard === "1" && (
+                      <SearchResults
+                        className="h-[calc(100vh-22rem)]"
+                        isFetching={isLoading}
+                        imageQueries={imageQueries}
+                        data={advSearchResults}
+                        onColorClick={onColorClick}
+                        searchQuery={searchTerms}
+                        setResultsLoading={setResultsLoader}
+                        setSearchTerms={setSearchTerms}
+                        setShowInitialSearch={setShowInitialSearch}
+                        recipeData={recipeData}
+                        searchBy={searchBy}
+                        resultsLoader={resultsLoader}
+                        form={formComponent}
+                        title={title}
+                        buttonPrimary={buttonPrimary}
+                        buttonSecondary={buttonSecondary}
+                      />
+                    )}
+                  {isRecipeLoading || isRecipeFetching || resultsLoader ? (
+                    <Loader />
+                  ) : (
+                    !isRecipeError &&
+                    resultCard === "2" && (
+                      <ConfirmColor
+                        selectedColor={selectedColor}
+                        onRecipeClick={onRecipeClick}
+                        getColorImage={getColorImage}
+                        recipeData={recipeData}
+                        imageQueries={imageQueries}
+                        getUndercoatImg={getUndercoatImg}
+                        setRemove={setRemove}
+                      />
+                    )
                   )}
-                {isRecipeLoading || isRecipeFetching || resultsLoader ? (
-                  <Loader />
-                ) : (
-                  !isRecipeError &&
-                  resultCard === "2" && (
-                    <ConfirmColor
-                      selectedColor={selectedColor}
-                      onRecipeClick={onRecipeClick}
-                      getColorImage={getColorImage}
-                      recipeData={recipeData}
-                      imageQueries={imageQueries}
-                      getUndercoatImg={getUndercoatImg}
-                      setRemove={setRemove}
-                    />
-                  )
-                )}
+                </div>
               </div>
-            </div>
-          )
-        )
+            )
+          )}
+        </div>
       ) : (
         <div className="flex items-center justify-center pt-[18%] md:pt-[10%]">
           <div className="flex flex-col justify-center items-center pt-3 gap-2 md:mt-6 mx-auto sm:w-[400px]">

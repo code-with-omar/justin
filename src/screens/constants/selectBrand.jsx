@@ -27,18 +27,18 @@ export default function SelectBrand() {
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <div className="h-full py-2">
-      <div className="grid gap-6 grid-cols-1 md:overflow-y-auto xl:my-10 max-h-[60vh] px-4 scrollbar">
+    <div className=" p-5 overflow-y-auto xl:my-10 h-[80vh] md:h-[83vh] mt-2 sm:mt-5 bg-background">
+      <div className="grid gap-6 grid-cols-1 overflow-y-auto px-4">
         <input
           type="text"
           placeholder="Quick Search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="input input-bordered w-full"
+          className="input input-bordered w-full bg-[#e5e7eb]"
         />
       </div>
 
-      <div className="grid gap-6 grid-cols-2 md:grid-cols-4 xl:grid-cols-4 md:overflow-y-auto xl:my-10 max-h-[60vh] px-4 scrollbar">
+      <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4  px-4 mt-2">
         {filteredBrands?.map((brand, index) => (
           <div
             key={index}
