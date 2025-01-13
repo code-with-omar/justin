@@ -77,7 +77,7 @@ export const ResponsiveSearch = () => {
 
   const handleAllStep = () => {
     if (step === "3") {
-      setIsSearching(false);
+      setIsSearching(true);
     }
     if (step > 1) {
       setStep(step - 1);

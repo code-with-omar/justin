@@ -231,7 +231,7 @@ export default function Search({ setRemove, ...rest }) {
         <div className="absolute w-full">
           <div className="flex justify-between items-center pl-7"></div>
           <div>
-            {!isLoading && !isSearchResultsFetching && resultCard === "1" && (
+            {!isLoading && !isSearchResultsFetching && resultCard == "1" && (
               <SearchResults
                 className="h-[calc(100vh-22rem)]"
                 isFetching={isLoading}
