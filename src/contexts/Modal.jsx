@@ -5,7 +5,7 @@ export const ModalContext = createContext();
 export function ModalProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState("1");
-  const [hasSearchValue, setHasSearchValue] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [stepsValue, setStepsValue] = useState({ brand: null, modelId: null });
@@ -13,8 +13,8 @@ export function ModalProvider({ children }) {
   const [searchStep, setSearchStep] = useState("1");
   const [initialAdvance, setInitialAdvance] = useState(false);
   const [advanceStep, setAdvanceStep] = useState("1");
+  const [isSearching, setIsSearching] = useState(false);
   // Tailwind utility for detecting screen size (use built-in classes for responsiveness)
-  const isDesktop = window.innerWidth >= 768;
 
   function openModal() {
     setIsOpen(true);
@@ -24,12 +24,12 @@ export function ModalProvider({ children }) {
 
   function closeModal() {
     setStep("1");
-    setHasSearchValue(false);
+
     setIsLoading(false);
     setIsOpen(false);
     setIsSidebarCollapsed(false);
     setInitialAdvance(false);
-
+    isSearching(false);
     setAdvanceStep("1");
     setTimeout(() => {
       document.body.style.overflow = "auto";
@@ -40,17 +40,15 @@ export function ModalProvider({ children }) {
   const value = {
     stepsValue,
     isOpen,
-    isDesktop,
     step,
     isLoading,
-    hasSearchValue,
     isSidebarCollapsed,
     setIsLoading,
     setStep,
     setIsOpen,
     openModal,
     closeModal,
-    setHasSearchValue,
+
     setStepsValue,
     setIsSidebarCollapsed,
     resultCard,
@@ -61,6 +59,8 @@ export function ModalProvider({ children }) {
     setInitialAdvance,
     advanceStep,
     setAdvanceStep,
+    isSearching,
+    setIsSearching,
   };
 
   return (

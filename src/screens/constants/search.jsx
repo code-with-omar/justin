@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Logo from "../../assets/new-logo-trans.png";
 import { useModal } from "../../contexts/Modal";
-import { ArrowBack, ArrowForward } from "../../components/common/svgs";
+import { ArrowForward } from "../../components/common/svgs";
 import useLunaSearch from "../../hooks/useLunaSearch";
 import useRecipeImages from "../../hooks/useRecipeImages";
 import useLunaRecipe from "../../hooks/useLunaRecipe";
@@ -15,44 +15,27 @@ import { ColorsType } from "./colorType";
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
-export default function Search({
-  setIsAdvSearch,
-  isAdvSearch,
-  remove,
-  setRemove,
-  ...rest
-}) {
+export default function Search({ setRemove, ...rest }) {
   const [tipsDrawerOpen, setTipsDrawerOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
   const [searchTerms, setSearchTerms] = useState({});
   const [selectedColor, setSelectedColor] = useState(null);
-  const [isSearching, setIsSearching] = useState(false); // Track if search is in progress
+  // Track if search is in progress
   const [resultsLoader, setResultsLoader] = useState(false);
   const [showInitialSearch, setShowInitialSearch] = useState(true);
   const [advSearchResults, setAdvSearchResults] = useState();
 
   const {
     step,
-    setIsLoading,
     isLoading,
     setStep,
-    colorStep,
-    setColorStep,
-    hasSearchValue,
-    setHasSearchValue,
-    isSidebarCollapsed,
-    setIsSidebarCollapsed,
-    isDesktop,
-    stepsValue,
     resultCard,
     setResultCard,
-    searchStep,
-    setSearchStep,
-    setSearchClik,
     initialAdvance,
     setInitialAdvance,
     advanceStep,
-    setAdvanceStep,
+    isSearching,
+    setIsSearching,
   } = useModal();
 
   const searchInputRef = useRef();

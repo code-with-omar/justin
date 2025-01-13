@@ -6,18 +6,15 @@ export const ResponsiveSearch = () => {
   const {
     isOpen,
     step,
-    isDesktop,
     openModal,
     closeModal,
     setStep,
-    setShowInitialSearch,
-    setHasSearchValue,
-    isLoading,
-    setIsSidebarCollapsed,
     resultCard,
     setResultCard,
     searchStep,
     setSearchStep,
+    setIsSearching,
+    isSearching,
   } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
@@ -79,6 +76,9 @@ export const ResponsiveSearch = () => {
   };
 
   const handleAllStep = () => {
+    if (step === "3") {
+      setIsSearching(false);
+    }
     if (step > 1) {
       setStep(step - 1);
     }

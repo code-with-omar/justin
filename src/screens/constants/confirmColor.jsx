@@ -1,5 +1,9 @@
 import SelectedColorCard from "./selectedColor";
 import { Check } from "../../../src/components/common/svgs/index";
+import gallonLarge from "../../assets/gallon-one.png";
+import gallonMedium from "../../assets/gallon-two.png";
+import gallonSmall from "../../assets/gallon-three.png";
+import SelectedColorCardOutUnderCoat from "./selectedColorCardOutUnderCoat";
 
 export default function ConfirmColor({
   selectedColor,
@@ -75,16 +79,16 @@ export default function ConfirmColor({
     <div className="overflow-y-auto h-screen">
       {!recipeData?.undercoat ? (
         <div>
-          <h2> Your Selected Color:</h2>
-          <h1>hello i am</h1>
-          <SelectedColorCard
-            onClick={onRecipeClick}
-            imageurl={getColorImage(selectedColor)}
-            color_code={selectedColor.code || ""}
-            color_name={selectedColor.name || ""}
-            year_range={selectedColor.year || ""}
-            brand={selectedColor.fullBrand || ""}
-          />
+          <div>
+            <SelectedColorCardOutUnderCoat
+              onClick={onRecipeClick}
+              imageurl={getColorImage(selectedColor)}
+              color_code={selectedColor.code || ""}
+              color_name={selectedColor.name || ""}
+              year_range={selectedColor.year || ""}
+              brand={selectedColor.fullBrand || ""}
+            />
+          </div>
         </div>
       ) : (
         <div>
