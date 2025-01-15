@@ -15,6 +15,7 @@ export function ModalProvider({ children }) {
   const [advanceStep, setAdvanceStep] = useState("1");
   const [isSearching, setIsSearching] = useState(false);
   const [advanceBack, setAdvanceBack] = useState("1");
+  const [tipsIsOpen, setIsTipsOpen] = useState(false);
   // Tailwind utility for detecting screen size (use built-in classes for responsiveness)
 
   function openModal() {
@@ -22,22 +23,28 @@ export function ModalProvider({ children }) {
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = "0px";
   }
-
   function closeModal() {
     setStep("1");
-
     setIsLoading(false);
     setIsOpen(false);
     setIsSidebarCollapsed(false);
     setInitialAdvance(false);
-    isSearching(false);
+    setIsSearching(false);
     setAdvanceStep("1");
+    setResultCard("1");
+    setStepsValue({ brand: null, modelId: null });
+    setSearchStep("1");
+    setAdvanceBack("1");
+
+    // Allow body scroll after modal closes
     setTimeout(() => {
       document.body.style.overflow = "auto";
       document.body.style.paddingRight = "initial";
-    });
+    }, 0);
   }
-
+  const tipsCloseModal = () => {
+    setIsTipsOpen(false);
+  };
   const value = {
     stepsValue,
     isOpen,
@@ -49,7 +56,6 @@ export function ModalProvider({ children }) {
     setIsOpen,
     openModal,
     closeModal,
-
     setStepsValue,
     setIsSidebarCollapsed,
     resultCard,
@@ -64,6 +70,9 @@ export function ModalProvider({ children }) {
     setIsSearching,
     advanceBack,
     setAdvanceBack,
+    tipsIsOpen,
+    setIsTipsOpen,
+    tipsCloseModal,
   };
 
   return (

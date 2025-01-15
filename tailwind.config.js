@@ -42,6 +42,8 @@ export default {
         h6: ["Montserrat", "sans-serif"],
         h2: ["Montserrat", "sans-serif"],
         h4: ["Montserrat", "sans-serif"],
+        p: ["Montserrat", "sans-serif"],
+        span: ["Montserrat", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

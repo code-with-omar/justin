@@ -17,7 +17,7 @@ const advancedWrapStep = ["Select Make", "Select Model", "Select Color"];
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
-export default function Search({ setRemove, ...rest }) {
+export default function Search({ setRemove, buttonSecondary, ...rest }) {
   const [tipsDrawerOpen, setTipsDrawerOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
   const [searchTerms, setSearchTerms] = useState({});
@@ -38,6 +38,7 @@ export default function Search({ setRemove, ...rest }) {
     advanceStep,
     isSearching,
     setIsSearching,
+    setAdvanceStep,
   } = useModal();
 
   const searchInputRef = useRef();
@@ -65,6 +66,7 @@ export default function Search({ setRemove, ...rest }) {
     if (!isSearchResultsFetching && isSearching && !isRecipeError) {
       setIsSearching(false);
       setStep("2");
+      setInitialAdvance();
     }
   }, [isSearchResultsFetching, isSearching, setStep]);
 
@@ -80,7 +82,7 @@ export default function Search({ setRemove, ...rest }) {
   const undercoatImage = useRecipeImages([
     { id: recipeData?.undercoatId, parentId: recipeData?.undercoatId },
   ]);
-  // TODO: 1. getUndercoatImg
+
   const getUndercoatImg = (color, withUrl = true) => {
     const query = undercoatImage.find(
       (query) => query?.data?.id === color.undercoatId
@@ -160,9 +162,9 @@ export default function Search({ setRemove, ...rest }) {
     createProduct(productData);
   }, [recipeData, selectedColor, undercoatImage, imageQueries]);
 
-  const toggleTipsDrawer = () => {
-    setTipsDrawerOpen((prev) => !prev);
-  };
+  // const toggleTipsDrawer = () => {
+  //   setTipsDrawerOpen((prev) => !prev);
+  // };
   const formComponent = (
     <form
       id="advanced-search-form"
@@ -196,20 +198,91 @@ export default function Search({ setRemove, ...rest }) {
       Search By Make
     </button>
   );
-  const buttonSecondary = (
-    <button
-      className="btn rounded-full bg-white text-[#0d1120]  font-normal capitalize border border-black w-1/2 hover:bg-[#1cbcba] hover:text-white hover:border-[#1cbcba] text-[12px] sm:text-base"
-      onClick={toggleTipsDrawer}
-    >
-      Search Tips
-    </button>
-  );
+  // const buttonSecondary = (
+  //   <button
+  //     className="btn rounded-full bg-white text-[#0d1120]  font-normal capitalize border border-black w-1/2 hover:bg-[#1cbcba] hover:text-white hover:border-[#1cbcba] text-[12px] sm:text-base"
+  //     onClick={toggleTipsDrawer}
+  //   >
+  //     Search Tips
+  //   </button>
+  // );
   const title = (
     <h4 className="text-[#343434] text-center mb-4 font-extrabold text-xl mt-3 uppercase">
       SEARCH FOR YOUR
       <span className="text-[#1cbcba] text-xl font-extrabold"> COLOR</span>
     </h4>
   );
+  const advancedHeader = (
+    <div className="py-6 flex justify-center flex-col px-5">
+      <div className="flex items-center space-x-6 w-full justify-center">
+        {advancedWrapStep.map((label, index) => (
+          <div
+            key={label}
+            className="flex items-center justify-between space-x-2"
+          >
+            {/* Step Circle */}
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${
+                index < advanceStep
+                  ? "bg-blue-600" // Completed step
+                  : index === advanceStep
+                  ? "bg-blue-900" // Active step
+                  : "bg-gray-200 text-gray-400" // Future step
+              }`}
+            >
+              {index < advanceStep ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              ) : (
+                index + 1
+              )}
+            </div>
+            {/* Connector Line */}
+            {index !== advancedWrapStep.length - 1 && (
+              <div
+                className={`h-0.5 flex-grow ${
+                  index < advanceStep
+                    ? "bg-blue-900" // Line for completed steps
+                    : "bg-gray-200" // Line for future steps
+                }`}
+              ></div>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-between mt-4 text-sm font-medium">
+        {advancedWrapStep.map((label, index) => (
+          <span
+            key={label}
+            className={`${
+              index === advanceStep
+                ? "text-blue-900 font-bold" // Active step text
+                : index < advanceStep
+                ? "text-black" // Completed step text
+                : "text-gray-400" // Future step text
+            }`}
+          >
+            {label}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+  // const handlePreviousStep = () => {
+  //   setAdvanceStep(advanceStep - 1);
+  // };
   // <div className="relative flex flex-col justify-center items-center border-0 overflow-x-hidden overflow-y-scroll p-0 w-full h-full md:border-0 md:overflow-y-hidden xl:flex-col">
   return (
     <div className="parentWrapper">
@@ -273,6 +346,10 @@ export default function Search({ setRemove, ...rest }) {
         </div>
       ) : initialAdvance ? (
         <div className="w-full">
+          {/* <button className="btn" onClick={handlePreviousStep}>
+            back
+          </button> */}
+          {advancedHeader}
           {advanceStep === "1" ? (
             <SelectBrand />
           ) : advanceStep === "2" ? (
