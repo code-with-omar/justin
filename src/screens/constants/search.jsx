@@ -17,7 +17,12 @@ const advancedWrapStep = ["Select Make", "Select Model", "Select Color"];
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
-export default function Search({ setRemove, buttonSecondary, ...rest }) {
+export default function Search({
+  setRemove,
+  buttonSecondary,
+  setError,
+  ...rest
+}) {
   const [tipsDrawerOpen, setTipsDrawerOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
   const [searchTerms, setSearchTerms] = useState({});
@@ -82,7 +87,9 @@ export default function Search({ setRemove, buttonSecondary, ...rest }) {
   const undercoatImage = useRecipeImages([
     { id: recipeData?.undercoatId, parentId: recipeData?.undercoatId },
   ]);
-
+  if (isRecipeError) {
+    setError(true);
+  }
   const getUndercoatImg = (color, withUrl = true) => {
     const query = undercoatImage.find(
       (query) => query?.data?.id === color.undercoatId
@@ -161,10 +168,6 @@ export default function Search({ setRemove, buttonSecondary, ...rest }) {
     };
     createProduct(productData);
   }, [recipeData, selectedColor, undercoatImage, imageQueries]);
-
-  // const toggleTipsDrawer = () => {
-  //   setTipsDrawerOpen((prev) => !prev);
-  // };
   const formComponent = (
     <form
       id="advanced-search-form"
@@ -299,10 +302,7 @@ export default function Search({ setRemove, buttonSecondary, ...rest }) {
             <Loader />
           </div>
         </div>
-      ) : (step === "2" || step === "3") &&
-        searchResults &&
-        !initialAdvance &&
-        searchResults.length > 0 ? (
+      ) : (step === "2" || step === "3") && searchResults && !initialAdvance ? (
         <div className="absolute w-full">
           <div className="flex justify-between items-center pl-7"></div>
           <div>
@@ -310,6 +310,7 @@ export default function Search({ setRemove, buttonSecondary, ...rest }) {
               <SearchResults
                 className="h-[calc(100vh-22rem)]"
                 isFetching={isLoading}
+                isSearching={isSearching}
                 imageQueries={imageQueries}
                 data={searchResults}
                 onColorClick={onColorClick}

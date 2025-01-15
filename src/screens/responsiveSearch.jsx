@@ -3,6 +3,9 @@ import { useModal } from "../contexts/Modal"; // Adjust the path to your ModalCo
 import { CloseIcon, ArrowBack } from "../components/common/svgs";
 import Search from "./constants/search";
 import TipsDrower from "./../components/common/tipsDrower/tipsDrower";
+import { TipsErrorDrawerStyle } from "./../components/common/style";
+import { DrawerStyle } from "./constants/style";
+import ErrorDrower from "./../components/common/errorDrower/errorDrower";
 
 export const ResponsiveSearch = () => {
   const {
@@ -17,10 +20,13 @@ export const ResponsiveSearch = () => {
     setSearchStep,
     setIsSearching,
     isSearching,
+    isRedirectDrawer,
+    setIsRedirectDrawer,
   } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
   const [remove, setRemove] = useState(false);
+  const [error, setError] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [isTipsDrawerOpen, setIsTipsDrawerOpen] = useState(false);
 
@@ -45,63 +51,6 @@ export const ResponsiveSearch = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const drawerStyle = (isDrawerOpen) => ({
-    position: "fixed",
-    zIndex: isDrawerOpen ? 60 : 50,
-    backgroundColor: "white",
-    color: "black",
-    transition: "transform 0.3s",
-    top: isMobile ? "13%" : "0",
-    right: "0",
-    bottom: "auto",
-    width: isMobile ? "100%" : "60%",
-    height: "100%",
-    transform: isDrawerOpen
-      ? isMobile
-        ? "translateY(0)"
-        : "translateX(0)"
-      : isMobile
-      ? "translateY(100%)"
-      : "translateX(100%)",
-    display: "flex",
-    flexDirection: "column",
-    borderTopLeftRadius:
-      isDrawerOpen && isMobile
-        ? "1rem"
-        : isDrawerOpen && !isMobile
-        ? "3rem"
-        : "0",
-    borderTopRightRadius: isDrawerOpen && isMobile ? "1rem" : "0",
-  });
-  const tisDrawerStyle = (isDrawerOpen) => ({
-    position: "fixed",
-    zIndex: isDrawerOpen ? 60 : 50,
-    backgroundColor: "#1cbcba",
-    color: "black",
-    transition: "transform 0.3s",
-    top: isMobile ? "13%" : "0",
-    right: "0",
-    bottom: "auto",
-    width: isMobile ? "100%" : "55%",
-    height: "100%",
-    transform: isDrawerOpen
-      ? isMobile
-        ? "translateY(0)"
-        : "translateX(0)"
-      : isMobile
-      ? "translateY(100%)"
-      : "translateX(100%)",
-    display: "flex",
-    flexDirection: "column",
-    borderTopLeftRadius:
-      isDrawerOpen && isMobile
-        ? "1rem"
-        : isDrawerOpen && !isMobile
-        ? "3rem"
-        : "0",
-    borderTopRightRadius: isDrawerOpen && isMobile ? "1rem" : "0",
-  });
   const handleAllStep = () => {
     if (step === "3") {
       setIsSearching(true);
@@ -143,7 +92,7 @@ export const ResponsiveSearch = () => {
   return (
     <div className="bg-white">
       {/* Main Drawer */}
-      <div style={drawerStyle(isOpen)}>
+      <div style={DrawerStyle(isOpen, isMobile)}>
         {isMobile && isOpen && (
           <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-teal-400"></div>
         )}
@@ -189,12 +138,12 @@ export const ResponsiveSearch = () => {
             isAdvSearch={isAdvSearch}
             setIsAdvSearch={setIsAdvSearch}
             buttonSecondary={buttonSecondary}
+            setError={setError}
           />
         </div>
       </div>
-
       {/* Secondary Drawer */}
-      <div style={tisDrawerStyle(isTipsDrawerOpen)}>
+      <div style={TipsErrorDrawerStyle(isTipsDrawerOpen, isMobile)}>
         {!isMobile && (
           <div className="flex ml-auto">
             <button
@@ -213,18 +162,37 @@ export const ResponsiveSearch = () => {
           <TipsDrower></TipsDrower>
         </div>
       </div>
-
+      {/* Error drower */}
+      <div style={TipsErrorDrawerStyle(error, isMobile)}>
+        {isMobile && (
+          <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
+        )}
+        <ErrorDrower></ErrorDrower>
+      </div>
+      {/* isRedirectDrawer */}
+      <div style={TipsErrorDrawerStyle(isRedirectDrawer, isMobile)}>
+        {isMobile && (
+          <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
+        )}
+        <ErrorDrower></ErrorDrower>
+      </div>
+      {/* Background Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={closeModal}
         ></div>
       )}
-
       {isTipsDrawerOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-black bg-opacity-50 z-50"
           onClick={() => setIsTipsDrawerOpen(false)}
+        ></div>
+      )}
+      {isRedirectDrawer && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50"
+          onClick={() => setIsRedirectDrawer(false)}
         ></div>
       )}
     </div>

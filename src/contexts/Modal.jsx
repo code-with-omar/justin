@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 
 export const ModalContext = createContext();
 
@@ -16,13 +16,26 @@ export function ModalProvider({ children }) {
   const [isSearching, setIsSearching] = useState(false);
   const [advanceBack, setAdvanceBack] = useState("1");
   const [tipsIsOpen, setIsTipsOpen] = useState(false);
-  // Tailwind utility for detecting screen size (use built-in classes for responsiveness)
-
+  const [error, setError] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
+  const [isRedirectDrawer, setIsRedirectDrawer] = useState(false);
   function openModal() {
     setIsOpen(true);
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = "0px";
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 900);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   function closeModal() {
     setStep("1");
     setIsLoading(false);
@@ -35,7 +48,7 @@ export function ModalProvider({ children }) {
     setStepsValue({ brand: null, modelId: null });
     setSearchStep("1");
     setAdvanceBack("1");
-
+    setError(false);
     // Allow body scroll after modal closes
     setTimeout(() => {
       document.body.style.overflow = "auto";
@@ -73,6 +86,11 @@ export function ModalProvider({ children }) {
     tipsIsOpen,
     setIsTipsOpen,
     tipsCloseModal,
+    setError,
+    error,
+    isMobile,
+    isRedirectDrawer,
+    setIsRedirectDrawer,
   };
 
   return (

@@ -26,6 +26,7 @@ export default function SearchResults({
     resultCard,
     setResultCard,
     setSearchStep,
+    setIsRedirectDrawer,
   } = useModal();
 
   const [showModal, setShowModal] = useState(false);
@@ -74,6 +75,10 @@ export default function SearchResults({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  if (!data?.length) {
+    setIsRedirectDrawer(true);
+    setStep("1");
+  }
   return (
     <div className={`w-full ${isMobile ? "overflow-y-auto h-[80vh]" : ""}`}>
       <div className="">
