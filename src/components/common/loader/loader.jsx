@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="fixed bottom-[13%] sm:bottom-[0%] left-0 w-full h-2 bg-black">
+    <div className="fixed bottom-[13%] md:bottom-[0%] left-0 w-full h-2 bg-black">
       <div
         className="h-full bg-red-500 animate-[load_3s_infinite]"
         style={{ animationTimingFunction: "linear" }}

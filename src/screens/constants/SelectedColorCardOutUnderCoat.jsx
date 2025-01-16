@@ -62,8 +62,8 @@ const SelectedColorCardOutUnderCoat = ({
       </div>
 
       {/* Available Sizes Section */}
-      <div className="invisible sm:visible sm:w-1/2 sm:border sm:rounded-xl sm:p-4 mt-4 overflow-y-auto h-screen">
-        <div className="sm:flex-row sm:text-center">
+      <div className="invisible sm:visible sm:w-1/2 sm:border sm:rounded-xl sm:p-4 mt-8 overflow-y-auto h-[45vh] sm:mb-60">
+        <div className="sm:flex-row sm:text-center  ">
           <h2 className="text-[#000] font-bold">Available Sizes:</h2>
           <span className="text-[12px]">
             4oz | Aerosols | Pints | Quarts | Gallons

@@ -79,16 +79,14 @@ export default function ConfirmColor({
     <div className="overflow-y-auto h-screen">
       {!recipeData?.undercoat ? (
         <div>
-          <div>
-            <SelectedColorCardOutUnderCoat
-              onClick={onRecipeClick}
-              imageurl={getColorImage(selectedColor)}
-              color_code={selectedColor.code || ""}
-              color_name={selectedColor.name || ""}
-              year_range={selectedColor.year || ""}
-              brand={selectedColor.fullBrand || ""}
-            />
-          </div>
+          <SelectedColorCardOutUnderCoat
+            onClick={onRecipeClick}
+            imageurl={getColorImage(selectedColor)}
+            color_code={selectedColor.code || ""}
+            color_name={selectedColor.name || ""}
+            year_range={selectedColor.year || ""}
+            brand={selectedColor.fullBrand || ""}
+          />
         </div>
       ) : (
         <div>

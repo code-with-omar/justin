@@ -23,6 +23,9 @@ export const ResponsiveSearch = () => {
     isSearching,
     isRedirectDrawer,
     setIsRedirectDrawer,
+    advanceStep,
+    setAdvanceStep,
+    initialAdvance,
   } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
@@ -80,7 +83,12 @@ export const ResponsiveSearch = () => {
       <span className="text-[#1cbcba] text-xl font-extrabold"> COLOR</span>
     </h4>
   );
-
+  const advanceSearchTitle = (
+    <h4 className="text-[#343434] text-center font-extrabold text-xl flex-1 uppercase">
+      Advanced
+      <span className="text-[#1cbcba] text-xl font-extrabold"> search</span>
+    </h4>
+  );
   const buttonSecondary = (
     <button
       className="btn rounded-full bg-white text-[#0d1120] font-normal capitalize border border-black w-1/2 hover:bg-[#1cbcba] hover:text-white hover:border-[#1cbcba] text-[12px] sm:text-base"
@@ -109,6 +117,7 @@ export const ResponsiveSearch = () => {
             )}
             {step == "2" && searchColor}
             {step == "3" && comfrimColor}
+            {initialAdvance && advanceStep <= 3 && advanceSearchTitle}
             <button
               className="btn btn-circle btn-outline ml-auto border-black hover:bg-white hover:border-black"
               onClick={closeModal}
@@ -143,6 +152,7 @@ export const ResponsiveSearch = () => {
           />
         </div>
       </div>
+
       {/* Secondary Drawer */}
       <div style={TipsErrorDrawerStyle(isTipsDrawerOpen, isMobile)}>
         {!isMobile && (
