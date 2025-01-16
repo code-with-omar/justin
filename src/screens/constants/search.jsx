@@ -25,9 +25,7 @@ export default function Search({
 }) {
   const [tipsDrawerOpen, setTipsDrawerOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
-  const [searchTerms, setSearchTerms] = useState({});
   const [selectedColor, setSelectedColor] = useState(null);
-  // Track if search is in progress
   const [resultsLoader, setResultsLoader] = useState(false);
   const [showInitialSearch, setShowInitialSearch] = useState(true);
   const [advSearchResults, setAdvSearchResults] = useState();
@@ -44,6 +42,8 @@ export default function Search({
     isSearching,
     setIsSearching,
     setAdvanceStep,
+    searchTerms,
+    setSearchTerms,
   } = useModal();
 
   const searchInputRef = useRef();
@@ -56,7 +56,6 @@ export default function Search({
     } else {
       setStep("1");
       setResultCard("1");
-      // Update searchTerms state and set isSearching to true
       setSearchTerms(searchInput);
       setIsSearching(true);
       setInitialAdvance(false);

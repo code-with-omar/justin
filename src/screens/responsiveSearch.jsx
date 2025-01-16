@@ -6,6 +6,7 @@ import TipsDrower from "./../components/common/tipsDrower/tipsDrower";
 import { TipsErrorDrawerStyle } from "./../components/common/style";
 import { DrawerStyle } from "./constants/style";
 import ErrorDrower from "./../components/common/errorDrower/errorDrower";
+import { RedirectDrawer } from "./../components/common/redirectDrawer/redirectDrawer";
 
 export const ResponsiveSearch = () => {
   const {
@@ -159,7 +160,7 @@ export const ResponsiveSearch = () => {
           {isMobile && (
             <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
           )}
-          <TipsDrower></TipsDrower>
+          <TipsDrower isMobile={isMobile}></TipsDrower>
         </div>
       </div>
       {/* Error drower */}
@@ -167,14 +168,14 @@ export const ResponsiveSearch = () => {
         {isMobile && (
           <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
         )}
-        <ErrorDrower></ErrorDrower>
+        <ErrorDrower isMobile={isMobile}></ErrorDrower>
       </div>
       {/* isRedirectDrawer */}
       <div style={TipsErrorDrawerStyle(isRedirectDrawer, isMobile)}>
         {isMobile && (
           <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
         )}
-        <ErrorDrower></ErrorDrower>
+        <RedirectDrawer isMobile={isMobile} />
       </div>
       {/* Background Overlay */}
       {isOpen && (
@@ -193,6 +194,12 @@ export const ResponsiveSearch = () => {
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50"
           onClick={() => setIsRedirectDrawer(false)}
+        ></div>
+      )}
+      {error && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50"
+          onClick={() => setError(false)}
         ></div>
       )}
     </div>

@@ -8,6 +8,7 @@ export function ModalProvider({ children }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [searchTerms, setSearchTerms] = useState({});
   const [stepsValue, setStepsValue] = useState({ brand: null, modelId: null });
   const [resultCard, setResultCard] = useState("1");
   const [searchStep, setSearchStep] = useState("1");
@@ -49,6 +50,7 @@ export function ModalProvider({ children }) {
     setSearchStep("1");
     setAdvanceBack("1");
     setError(false);
+    setSearchTerms({});
     // Allow body scroll after modal closes
     setTimeout(() => {
       document.body.style.overflow = "auto";
@@ -91,6 +93,8 @@ export function ModalProvider({ children }) {
     isMobile,
     isRedirectDrawer,
     setIsRedirectDrawer,
+    searchTerms,
+    setSearchTerms,
   };
 
   return (
