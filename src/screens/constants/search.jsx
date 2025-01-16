@@ -44,6 +44,8 @@ export default function Search({
     setAdvanceStep,
     searchTerms,
     setSearchTerms,
+    advanceCard,
+    setAdvanceCard,
   } = useModal();
 
   const searchInputRef = useRef();
@@ -72,7 +74,7 @@ export default function Search({
       setStep("2");
       setInitialAdvance();
     }
-  }, [isSearchResultsFetching, isSearching, setStep]);
+  }, [isSearchResultsFetching, isSearching, setStep, advanceStep]);
 
   const imageQueries = useRecipeImages(searchResults);
   const {
@@ -195,7 +197,10 @@ export default function Search({
   const buttonPrimary = (
     <button
       className="btn rounded-full bg-[#0d1120] text-white  font-normal capitalize border border-black hover:bg-white hover:text-[#1cbcba] hover:border-[#1cbcba] text-[12px] md:text-base w-1/2"
-      onClick={() => setInitialAdvance(true)}
+      onClick={() => {
+        setInitialAdvance(true);
+        setAdvanceStep(1);
+      }}
     >
       Search By Make
     </button>
@@ -282,9 +287,18 @@ export default function Search({
       </div>
     </div>
   );
-  // const handlePreviousStep = () => {
-  //   setAdvanceStep(advanceStep - 1);
-  // };
+  const handlePreviousStep = () => {
+    setAdvanceStep((prevStep) => {
+      if (prevStep <= 1) {
+        setInitialAdvance(false);
+        // Deactivate `initialAdvance` when step is 1 or lower
+        return 0; // Ensure the step doesn't go below 0
+      }
+      setInitialAdvance(true); // Keep `initialAdvance` active for higher steps
+      return prevStep - 1;
+    });
+  };
+
   // <div className="relative flex flex-col justify-center items-center border-0 overflow-x-hidden overflow-y-scroll p-0 w-full h-full md:border-0 md:overflow-y-hidden xl:flex-col">
   return (
     <div className="parentWrapper">
@@ -346,18 +360,16 @@ export default function Search({
         </div>
       ) : initialAdvance ? (
         <div className="w-full">
-          {/* <button className="btn" onClick={handlePreviousStep}>
+          <button className="btn" onClick={handlePreviousStep}>
             back
-          </button> */}
+          </button>
           {advancedHeader}
-          {advanceStep === "1" ? (
-            <SelectBrand />
-          ) : advanceStep === "2" ? (
-            <SelectModel />
-          ) : advanceStep === "3" ? (
+          {advanceStep === 1 && <SelectBrand />}
+          {advanceStep === 2 && <SelectModel />}
+          {advanceStep === 3 && (
             <ColorsType setAdvanceSearch={setAdvSearchResults} />
-          ) : (
-            advanceStep === "4" &&
+          )}
+          {advanceStep === "4" &&
             (step === "2" || step === "3") &&
             searchResults && (
               <div className="absolute w-full">
@@ -403,8 +415,7 @@ export default function Search({
                   )}
                 </div>
               </div>
-            )
-          )}
+            )}
         </div>
       ) : (
         <div className="flex items-center justify-center pt-[18%] md:pt-[10%]">

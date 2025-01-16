@@ -3,14 +3,20 @@ import React, { useEffect, useState } from "react";
 import { useBrands } from "./useSteps";
 
 export default function SelectBrand() {
-  const { setStepsValue, setIsLoading, setAdvanceStep, advanceStep } =
-    useModal();
+  const {
+    setStepsValue,
+    setIsLoading,
+    setAdvanceStep,
+    advanceStep,
+    setAdvanceCard,
+  } = useModal();
   const { data: brandsData, isFetching: brandsFetching } = useBrands();
 
   const [searchTerm, setSearchTerm] = useState("");
   const handleBrand = (brand) => {
     console.log(advanceStep);
-    setAdvanceStep("2");
+    setAdvanceCard(2);
+    setAdvanceStep(2);
     setStepsValue((prevState) => ({
       ...prevState,
       brand: brand,

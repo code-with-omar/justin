@@ -13,13 +13,14 @@ export function ModalProvider({ children }) {
   const [resultCard, setResultCard] = useState("1");
   const [searchStep, setSearchStep] = useState("1");
   const [initialAdvance, setInitialAdvance] = useState(false);
-  const [advanceStep, setAdvanceStep] = useState("1");
+  const [advanceStep, setAdvanceStep] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
   const [advanceBack, setAdvanceBack] = useState("1");
   const [tipsIsOpen, setIsTipsOpen] = useState(false);
   const [error, setError] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [isRedirectDrawer, setIsRedirectDrawer] = useState(false);
+  const [advanceCard, setAdvanceCard] = useState("1");
   function openModal() {
     setIsOpen(true);
     document.body.style.overflow = "hidden";
@@ -44,7 +45,7 @@ export function ModalProvider({ children }) {
     setIsSidebarCollapsed(false);
     setInitialAdvance(false);
     setIsSearching(false);
-    setAdvanceStep("1");
+    setAdvanceStep(1);
     setResultCard("1");
     setStepsValue({ brand: null, modelId: null });
     setSearchStep("1");
@@ -95,6 +96,8 @@ export function ModalProvider({ children }) {
     setIsRedirectDrawer,
     searchTerms,
     setSearchTerms,
+    advanceCard,
+    setAdvanceCard,
   };
 
   return (

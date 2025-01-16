@@ -10,6 +10,7 @@ export default function SelectModel() {
     setIsLoading,
     advanceStep,
     setAdvanceStep,
+    setAdvanceCard,
   } = useModal();
   const { data: modelsData, isLoading: isModelsLoading } =
     useModels(stepsValue);
@@ -22,7 +23,8 @@ export default function SelectModel() {
     }
   }, [isModelsLoading]);
   const handleModal = (selectedModalId) => {
-    setAdvanceStep("3");
+    setAdvanceStep(3);
+    setAdvanceCard("3");
     setStepsValue((prevState) => ({
       ...prevState,
       modelId: selectedModalId,
