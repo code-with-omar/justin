@@ -1,6 +1,6 @@
 import { useModal } from "../../contexts/Modal";
-import React, { useCallback, useEffect, useState } from "react";
-import ResultCard from "./resultCard";
+import { useCallback } from "react";
+import ResultCard from "../../components/resultCard/resultCard";
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 export default function SearchResults({

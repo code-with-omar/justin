@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useModal } from "../contexts/Modal"; // Adjust the path to your ModalContext
 import { CloseIcon, ArrowBack } from "../components/common/svgs";
 import Search from "./constants/search";
-import TipsDrower from "./../components/common/tipsDrower/tipsDrower";
+import TipsDrawer from "./../components/common/tipsDrawer/tipsDrawer";
 import { TipsErrorDrawerStyle } from "./../components/common/style";
 import { DrawerStyle } from "./constants/style";
 import ErrorDrower from "./../components/common/errorDrower/errorDrower";
@@ -196,7 +196,7 @@ export const ResponsiveSearch = () => {
           {isMobile && (
             <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
           )}
-          <TipsDrower isMobile={isMobile}></TipsDrower>
+          <TipsDrawer isMobile={isMobile}></TipsDrawer>
         </div>
       </div>
       {/* Error drower */}
@@ -212,7 +212,7 @@ export const ResponsiveSearch = () => {
           <div className="flex ml-auto pr-7 py-2">
             <button
               className="btn btn-circle btn-outline border-white hover:bg-white"
-              onClick={() => setIsRedirectDrawer(false)}
+              onClick={() => setIsTipsDrawerOpen(false)}
             >
               <CloseIcon />
             </button>

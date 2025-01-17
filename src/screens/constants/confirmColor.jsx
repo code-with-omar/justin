@@ -1,8 +1,6 @@
-import SelectedColorCard from "./selectedColor";
+import SelectedColorCard from "../../components/resultCard/selectedColor";
 import { Check } from "../../../src/components/common/svgs/index";
-import gallonLarge from "../../assets/gallon-one.png";
-import gallonMedium from "../../assets/gallon-two.png";
-import gallonSmall from "../../assets/gallon-three.png";
+
 import SelectedColorCardOutUnderCoat from "./selectedColorCardOutUnderCoat";
 
 export default function ConfirmColor({

@@ -12,7 +12,6 @@ import ConfirmColor from "./confirmColor";
 import SelectBrand from "./selectBrand";
 import SelectModel from "./selectModel";
 import { ColorsType } from "./colorType";
-import AdvanceStepWrap from "./advanceStepWrap";
 const advancedWrapStep = ["Select Make", "Select Model", "Select Color"];
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
@@ -208,7 +207,7 @@ export default function Search({ buttonSecondary, setError, ...rest }) {
     </h4>
   );
   const advancedHeader = (
-    <div className=" flex flex-col items-center justify-center ml-6 mt-2 h-[100px] sm:ml-[120px] md:ml-[140px]">
+    <div className=" flex flex-col items-center justify-center ml-6 my-3 h-[100px] sm:ml-[120px] md:my-10 md:ml-[140px]">
       <div className="ml-12 flex items-center w-full">
         {advancedWrapStep.map((label, index) => {
           const stepIndex = index + 1; // Adjust step index to start from 1
@@ -218,16 +217,16 @@ export default function Search({ buttonSecondary, setError, ...rest }) {
               <div
                 className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white text-xl font-bold ${
                   stepIndex < advanceStep
-                    ? "bg-blue-600" // Completed step
+                    ? "bg-white border border-black " // Completed step
                     : stepIndex === advanceStep
-                    ? "bg-blue-900" // Active step
+                    ? "bg-[#1D3D5A]" // Active step
                     : "bg-gray-200 text-gray-400" // Future step
                 }`}
               >
                 {stepIndex < advanceStep ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-8 h-8 sm:w-10 sm:h-10"
+                    className="w-8 h-8 sm:w-10 sm:h-10 text-[#0d1120]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -261,7 +260,7 @@ export default function Search({ buttonSecondary, setError, ...rest }) {
           return (
             <span
               key={label}
-              className={`w-full ${
+              className={`w-full text-base md:text-lg  ${
                 stepIndex === advanceStep
                   ? "text-blue-900 font-bold" // Active step text
                   : stepIndex < advanceStep

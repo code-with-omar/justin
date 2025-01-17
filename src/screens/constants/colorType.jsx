@@ -59,8 +59,8 @@ export const ColorsType = ({ setAdvanceSearch }) => {
   return (
     <div className="p-4 xl:p-10 xl:flex xl:flex-col xl:w-full">
       <div
-        className={`pb-2 px-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 overflow-y-auto h-[55vh] scroll-bar ${
-          !isMobile && "h-[75vh]"
+        className={`px-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 overflow-y-auto h-[53vh] ${
+          !isMobile && "h-[81vh] pb-32"
         }`}
       >
         {enhancedColorsData?.map((tile, index) => (

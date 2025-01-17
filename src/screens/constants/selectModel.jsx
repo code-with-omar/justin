@@ -4,11 +4,10 @@ import { useModels } from "./useSteps";
 
 export default function SelectModel() {
   const {
-    setStep,
     stepsValue,
     setStepsValue,
     setIsLoading,
-    advanceStep,
+
     setAdvanceStep,
     setAdvanceCard,
     isMobile,
@@ -36,8 +35,8 @@ export default function SelectModel() {
   );
   return (
     <div
-      className={`p-5 overflow-y-auto xl:my-10 h-[55vh] sm:h-[75vh] ${
-        !isMobile ? "h-[vh]" : "sm:h-[75vh"
+      className={`p-5 overflow-y-auto xl:my-10 h-[55vh] sm:h-[65vh] ${
+        !isMobile ? "h-[55vh]" : "sm:h-[75vh]"
       } mt-2 sm:mt-5 bg-background`}
     >
       <div className="grid gap-6 grid-cols-1 overflow-y-auto xl:my-10 max-h-[65vh]  scrollbar">

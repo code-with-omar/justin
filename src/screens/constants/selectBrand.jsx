@@ -35,7 +35,7 @@ export default function SelectBrand() {
   );
   return (
     <div
-      className={` p-5 overflow-y-auto xl:my-10 h-[55vh] md:h-[75vh] mt-2 sm:mt-5 bg-background ${
+      className={` p-5 overflow-y-auto xl:my-10 h-[55vh] md:h-[65vh] mt-2 sm:mt-5 bg-background ${
         !isMobile && "h-[75vh]"
       }`}
     >

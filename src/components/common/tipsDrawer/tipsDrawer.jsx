@@ -1,6 +1,6 @@
 import React from "react";
 import { CloseIcon } from "../../common/svgs/index";
-export default function TipsDrower({ isMobile }) {
+export default function TipsDrawer({ isMobile }) {
   const contentInfo = (
     <div>
       <p
