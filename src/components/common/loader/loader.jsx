@@ -2,9 +2,9 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="fixed bottom-[13%] md:bottom-[0%] left-0 w-full h-4 bg-black">
+    <div className="fixed bottom-[13%] md:bottom-[0%] left-0 w-full h-3 bg-[#1a6565]">
       <div
-        className="h-full bg-red-500 animate-[load_3s_infinite]"
+        className="h-full bg-[#1cbcba] animate-[load_3s_infinite]"
         style={{ animationTimingFunction: "linear" }}
       ></div>
       <style>

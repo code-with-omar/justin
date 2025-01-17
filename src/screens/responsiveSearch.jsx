@@ -212,7 +212,7 @@ export const ResponsiveSearch = () => {
           <div className="flex ml-auto pr-7 py-2">
             <button
               className="btn btn-circle btn-outline border-white hover:bg-white"
-              onClick={() => setIsTipsDrawerOpen(false)}
+              onClick={() => setIsRedirectDrawer(false)}
             >
               <CloseIcon />
             </button>
