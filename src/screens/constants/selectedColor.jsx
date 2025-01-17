@@ -28,8 +28,8 @@ const SelectedColorCard = ({
   const isColorCode =
     /^#[0-9A-F]{6}$/i.test(imageurl) || /^rgb/i.test(imageurl);
   return (
-    <div className=" w-ful px-8 sm:px-0">
-      <div className="flex gap-5  items-center mb-5 sm:px-8">
+    <div className=" w-ful px-8 sm:px-0 mt-3 sm:mt-5">
+      <div className="flex gap-5  items-center mb-5 sm:px-8 ">
         <div className="flex items-center justify-center w-12 h-12  rounded-sm ">
           <TickIcon />
         </div>

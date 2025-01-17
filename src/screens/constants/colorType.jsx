@@ -11,9 +11,9 @@ export const ColorsType = ({ setAdvanceSearch }) => {
     stepsValue,
     setStepsValue,
     setIsLoading,
-    isSidebarCollapsed,
     advanceStep,
     setAdvanceStep,
+    isMobile,
   } = useModal();
   const { data: colorsData } = useColorGroup();
 
@@ -23,7 +23,7 @@ export const ColorsType = ({ setAdvanceSearch }) => {
   ];
   const handleColor = () => {
     setStep("2");
-    setAdvanceStep("4");
+    setAdvanceStep(4);
   };
 
   const handleSeletedColor = async (color) => {
@@ -58,7 +58,11 @@ export const ColorsType = ({ setAdvanceSearch }) => {
 
   return (
     <div className="p-4 xl:p-10 xl:flex xl:flex-col xl:w-full">
-      <div className="pb-2 px-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 overflow-y-auto h-[65vh] scroll-bar">
+      <div
+        className={`pb-2 px-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-3 overflow-y-auto h-[55vh] scroll-bar ${
+          !isMobile && "h-[75vh]"
+        }`}
+      >
         {enhancedColorsData?.map((tile, index) => (
           <div
             key={index}

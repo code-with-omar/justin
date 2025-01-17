@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Logo from "../../assets/new-logo-trans.png";
 import { useModal } from "../../contexts/Modal";
 import { ArrowForward } from "../../components/common/svgs";
@@ -17,12 +17,7 @@ const advancedWrapStep = ["Select Make", "Select Model", "Select Color"];
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
-export default function Search({
-  setRemove,
-  buttonSecondary,
-  setError,
-  ...rest
-}) {
+export default function Search({ buttonSecondary, setError, ...rest }) {
   const [tipsDrawerOpen, setTipsDrawerOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
   const [selectedColor, setSelectedColor] = useState(null);
@@ -44,8 +39,7 @@ export default function Search({
     setAdvanceStep,
     searchTerms,
     setSearchTerms,
-    advanceCard,
-    setAdvanceCard,
+    setIsRedirectDrawer,
   } = useModal();
 
   const searchInputRef = useRef();
@@ -61,6 +55,7 @@ export default function Search({
       setSearchTerms(searchInput);
       setIsSearching(true);
       setInitialAdvance(false);
+      setAdvanceStep(1);
     }
   };
 
@@ -90,6 +85,7 @@ export default function Search({
   ]);
   if (isRecipeError) {
     setError(true);
+    setStep("1");
   }
   const getUndercoatImg = (color, withUrl = true) => {
     const query = undercoatImage.find(
@@ -205,14 +201,6 @@ export default function Search({
       Search By Make
     </button>
   );
-  // const buttonSecondary = (
-  //   <button
-  //     className="btn rounded-full bg-white text-[#0d1120]  font-normal capitalize border border-black w-1/2 hover:bg-[#1cbcba] hover:text-white hover:border-[#1cbcba] text-[12px] sm:text-base"
-  //     onClick={toggleTipsDrawer}
-  //   >
-  //     Search Tips
-  //   </button>
-  // );
   const title = (
     <h4 className="text-[#343434] text-center mb-4 font-extrabold text-xl mt-3 uppercase">
       SEARCH FOR YOUR
@@ -220,103 +208,91 @@ export default function Search({
     </h4>
   );
   const advancedHeader = (
-    <div className="py-6 flex justify-center flex-col px-5">
-      <div className="flex items-center space-x-6 w-full justify-center">
-        {advancedWrapStep.map((label, index) => (
-          <div
-            key={label}
-            className="flex items-center justify-between space-x-2"
-          >
-            {/* Step Circle */}
-            <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${
-                index < advanceStep
-                  ? "bg-blue-600" // Completed step
-                  : index === advanceStep
-                  ? "bg-blue-900" // Active step
-                  : "bg-gray-200 text-gray-400" // Future step
-              }`}
-            >
-              {index < advanceStep ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              ) : (
-                index + 1
+    <div className=" flex flex-col items-center justify-center ml-6 mt-2 h-[100px] sm:ml-[120px] md:ml-[140px]">
+      <div className="ml-12 flex items-center w-full">
+        {advancedWrapStep.map((label, index) => {
+          const stepIndex = index + 1; // Adjust step index to start from 1
+          return (
+            <div key={label} className="flex items-center w-full">
+              {/* Step Circle */}
+              <div
+                className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white text-xl font-bold ${
+                  stepIndex < advanceStep
+                    ? "bg-blue-600" // Completed step
+                    : stepIndex === advanceStep
+                    ? "bg-blue-900" // Active step
+                    : "bg-gray-200 text-gray-400" // Future step
+                }`}
+              >
+                {stepIndex < advanceStep ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-8 h-8 sm:w-10 sm:h-10"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                ) : (
+                  stepIndex
+                )}
+              </div>
+              {/* Horizontal Line */}
+              {stepIndex !== advancedWrapStep.length && (
+                <div
+                  className={`h-0.5 flex-grow mx-2 ${
+                    stepIndex < advanceStep ? "bg-blue-900" : "bg-gray-200"
+                  }`}
+                ></div>
               )}
             </div>
-            {/* Connector Line */}
-            {index !== advancedWrapStep.length - 1 && (
-              <div
-                className={`h-0.5 flex-grow ${
-                  index < advanceStep
-                    ? "bg-blue-900" // Line for completed steps
-                    : "bg-gray-200" // Line for future steps
-                }`}
-              ></div>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
-      <div className="flex justify-between mt-4 text-sm font-medium">
-        {advancedWrapStep.map((label, index) => (
-          <span
-            key={label}
-            className={`${
-              index === advanceStep
-                ? "text-blue-900 font-bold" // Active step text
-                : index < advanceStep
-                ? "text-black" // Completed step text
-                : "text-gray-400" // Future step text
-            }`}
-          >
-            {label}
-          </span>
-        ))}
+      <div className="flex justify-between mt-4 text-sm font-medium w-full">
+        {advancedWrapStep.map((label, index) => {
+          const stepIndex = index + 1;
+          return (
+            <span
+              key={label}
+              className={`w-full ${
+                stepIndex === advanceStep
+                  ? "text-blue-900 font-bold" // Active step text
+                  : stepIndex < advanceStep
+                  ? "text-black" // Completed step text
+                  : "text-gray-400" // Future step text
+              }`}
+            >
+              {label}
+            </span>
+          );
+        })}
       </div>
     </div>
   );
-  const handlePreviousStep = () => {
-    setAdvanceStep((prevStep) => {
-      if (prevStep <= 1) {
-        setInitialAdvance(false);
-        // Deactivate `initialAdvance` when step is 1 or lower
-        return 0; // Ensure the step doesn't go below 0
-      }
-      setInitialAdvance(true); // Keep `initialAdvance` active for higher steps
-      return prevStep - 1;
-    });
-  };
 
   // <div className="relative flex flex-col justify-center items-center border-0 overflow-x-hidden overflow-y-scroll p-0 w-full h-full md:border-0 md:overflow-y-hidden xl:flex-col">
   return (
     <div className="parentWrapper">
       {/* Show loader during search submission */}
       {isSearching ? (
-        <div>
-          <div className="top-full">
-            {title}
-            {formComponent}
-            <div className="flex items-center pt-3 gap-2 md:mt-6 w-64 justify-between mx-auto sm:w-[400px]">
-              {buttonPrimary}
-              {buttonSecondary}
-            </div>
-            <Loader />
+        <div className="">
+          {title}
+          {formComponent}
+          <div className="flex items-center pt-3 gap-2 md:mt-6 w-[80%] justify-between mx-auto sm:w-[400px]">
+            {buttonPrimary}
+            {buttonSecondary}
           </div>
+          <Loader />
         </div>
       ) : (step === "2" || step === "3") && searchResults && !initialAdvance ? (
-        <div className="absolute w-full">
+        <div className="w-full">
           <div className="flex justify-between items-center pl-7"></div>
           <div>
             {!isLoading && !isSearchResultsFetching && resultCard == "1" && (
@@ -352,7 +328,6 @@ export default function Search({
                   recipeData={recipeData}
                   imageQueries={imageQueries}
                   getUndercoatImg={getUndercoatImg}
-                  setRemove={setRemove}
                 />
               )
             )}
@@ -360,16 +335,16 @@ export default function Search({
         </div>
       ) : initialAdvance ? (
         <div className="w-full">
-          <button className="btn" onClick={handlePreviousStep}>
-            back
-          </button>
-          {advancedHeader}
+          {/* <button className="btn" onClick={handlePreviousStep}>
+              back
+            </button> */}
+          {advanceStep <= 3 && advancedHeader}
           {advanceStep === 1 && <SelectBrand />}
           {advanceStep === 2 && <SelectModel />}
           {advanceStep === 3 && (
             <ColorsType setAdvanceSearch={setAdvSearchResults} />
           )}
-          {advanceStep === "4" &&
+          {advanceStep === 4 &&
             (step === "2" || step === "3") &&
             searchResults && (
               <div className="absolute w-full">
@@ -409,7 +384,6 @@ export default function Search({
                         recipeData={recipeData}
                         imageQueries={imageQueries}
                         getUndercoatImg={getUndercoatImg}
-                        setRemove={setRemove}
                       />
                     )
                   )}
@@ -419,11 +393,11 @@ export default function Search({
         </div>
       ) : (
         <div className="flex items-center justify-center pt-[18%] md:pt-[10%]">
-          <div className="flex flex-col justify-center items-center pt-3 gap-2 md:mt-6 mx-auto sm:w-[400px]">
+          <div className="flex flex-col justify-center items-center pt-3 gap-y-2 md:mt-6 mx-auto sm:w-[400px]">
             <img className="w-56" src={Logo} alt="Logo" />
             {title}
             {formComponent}
-            <div className="flex items-center pt-3 gap-2 md:mt-6 w-full justify-between">
+            <div className="flex items-center pt-3 gap-5 md:mt-6 w-full justify-between">
               {buttonPrimary}
               {buttonSecondary}
             </div>

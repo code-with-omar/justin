@@ -20,18 +20,18 @@ export const ResponsiveSearch = () => {
     searchStep,
     setSearchStep,
     setIsSearching,
-    isSearching,
     isRedirectDrawer,
     setIsRedirectDrawer,
     advanceStep,
     setAdvanceStep,
     initialAdvance,
+    setInitialAdvance,
+    isMobile,
+    setIsMobile,
   } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
-  const [remove, setRemove] = useState(false);
   const [error, setError] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [isTipsDrawerOpen, setIsTipsDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -45,16 +45,6 @@ export const ResponsiveSearch = () => {
     };
   }, [openModal]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setIsMobile(width < 900);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
   const handleAllStep = () => {
     if (step === "3") {
       setIsSearching(true);
@@ -69,11 +59,33 @@ export const ResponsiveSearch = () => {
       setSearchStep(searchStep - 1);
     }
   };
+  const handlePreviousAdvancsStep = () => {
+    if (resultCard === "2") {
+      setResultCard("1");
+
+      return; // Exit early, so advanceStep doesn't decrease
+    }
+    setAdvanceStep((prevStep) => {
+      if (prevStep <= 1) {
+        setInitialAdvance(false);
+        setStep("1");
+        setResultCard("1");
+        return 0;
+      }
+
+      setIsRedirectDrawer(false);
+      setInitialAdvance(true);
+      return prevStep - 1;
+    });
+  };
 
   const searchColor = (
-    <h4 className="text-[#343434] text-center font-extrabold text-xl flex-1 uppercase">
+    <h4 className="text-[#343434] text-center font-extrabold text-lg sm:text-xl flex-1 uppercase">
       SEARCH FOR YOUR
-      <span className="text-[#1cbcba] text-xl font-extrabold"> COLOR</span>
+      <span className="text-[#1cbcba] text-lg font-extrabold sm:text-xl">
+        {" "}
+        COLOR
+      </span>
     </h4>
   );
 
@@ -102,12 +114,21 @@ export const ResponsiveSearch = () => {
     <div className="bg-white">
       {/* Main Drawer */}
       <div style={DrawerStyle(isOpen, isMobile)}>
-        {isMobile && isOpen && (
-          <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-teal-400"></div>
-        )}
-        {!isMobile && (
-          <div className="flex justify-between items-center p-5 pr-7">
-            {(step == "2" || step == "3") && (
+        <div>
+          {isMobile && isOpen && (
+            <div className="mx-auto my-2 sm:my-4 h-2 w-[100px] rounded-full bg-teal-400"></div>
+          )}
+          <div
+            className={`flex justify-between items-center px-5 py-2 pr-7 ${
+              !isMobile ? "rounded-tl-[3rem]" : ""
+            } ${
+              (!initialAdvance && (step == "2" || step == "3")) ||
+              initialAdvance
+                ? "bg-[#F0EFF0]"
+                : "bg-white"
+            }`}
+          >
+            {!initialAdvance && (step == "2" || step == "3") && (
               <button
                 className="btn btn-circle btn-outline border-black hover:bg-white hover:border-black"
                 onClick={handleAllStep}
@@ -115,36 +136,41 @@ export const ResponsiveSearch = () => {
                 <ArrowBack />
               </button>
             )}
-            {step == "2" && searchColor}
-            {step == "3" && comfrimColor}
+            {initialAdvance && (
+              <button
+                className="btn btn-circle btn-outline border-black hover:bg-white hover:border-black"
+                onClick={handlePreviousAdvancsStep}
+              >
+                <ArrowBack />
+              </button>
+            )}
+
+            {!initialAdvance && step == "2" && searchColor}
+            {!initialAdvance && step == "3" && comfrimColor}
             {initialAdvance && advanceStep <= 3 && advanceSearchTitle}
-            <button
-              className="btn btn-circle btn-outline ml-auto border-black hover:bg-white hover:border-black"
-              onClick={closeModal}
-            >
-              <CloseIcon />
-            </button>
+            {initialAdvance &&
+              advanceStep == 4 &&
+              resultCard === "1" &&
+              searchColor}
+            {initialAdvance &&
+              advanceStep == 4 &&
+              resultCard === "2" &&
+              comfrimColor}
+            {!isMobile && (
+              <button
+                className={`btn btn-circle btn-outline ml-auto  border-black hover:bg-white hover:border-black ${
+                  isMobile ? "invisible" : "visible"
+                }`}
+                onClick={closeModal}
+              >
+                <CloseIcon />
+              </button>
+            )}
           </div>
-        )}
-        {isMobile && (step == "2" || step == "3") && (
-          <div className="flex justify-between items-center p-2">
-            <button
-              className="rounded-full w-10 h-10 border flex justify-center items-center border-black hover:bg-white hover:border-black"
-              onClick={handleAllStep}
-            >
-              <ArrowBack />
-            </button>
-            {step == "2" && searchColor}
-            {step == "3" && comfrimColor}
-            <button className="invisible" onClick={closeModal}>
-              <CloseIcon />
-            </button>
-          </div>
-        )}
+        </div>
+
         <div className="flex-1">
           <Search
-            remove={remove}
-            setRemove={setRemove}
             isAdvSearch={isAdvSearch}
             setIsAdvSearch={setIsAdvSearch}
             buttonSecondary={buttonSecondary}
@@ -156,9 +182,9 @@ export const ResponsiveSearch = () => {
       {/* Secondary Drawer */}
       <div style={TipsErrorDrawerStyle(isTipsDrawerOpen, isMobile)}>
         {!isMobile && (
-          <div className="flex ml-auto">
+          <div className="flex ml-auto pr-7 py-2">
             <button
-              className="btn btn-circle btn-outline border-black hover:bg-white hover:border-black"
+              className="btn btn-circle btn-outline border-white hover:bg-white"
               onClick={() => setIsTipsDrawerOpen(false)}
             >
               <CloseIcon />
@@ -182,6 +208,16 @@ export const ResponsiveSearch = () => {
       </div>
       {/* isRedirectDrawer */}
       <div style={TipsErrorDrawerStyle(isRedirectDrawer, isMobile)}>
+        {!isMobile && (
+          <div className="flex ml-auto pr-7 py-2">
+            <button
+              className="btn btn-circle btn-outline border-white hover:bg-white"
+              onClick={() => setIsRedirectDrawer(false)}
+            >
+              <CloseIcon />
+            </button>
+          </div>
+        )}
         {isMobile && (
           <div className="mx-auto mb-4 mt-4 h-2 w-[100px] rounded-full bg-white"></div>
         )}

@@ -11,6 +11,7 @@ export default function SelectModel() {
     advanceStep,
     setAdvanceStep,
     setAdvanceCard,
+    isMobile,
   } = useModal();
   const { data: modelsData, isLoading: isModelsLoading } =
     useModels(stepsValue);
@@ -34,8 +35,12 @@ export default function SelectModel() {
     model.type.toLowerCase().includes(searchTerms.toLowerCase())
   );
   return (
-    <div className="p-5 overflow-y-auto xl:my-10 h-[80vh] md:h-[83vh] mt-2 sm:mt-5 bg-background">
-      <div className="grid gap-6 grid-cols-1 overflow-y-auto xl:my-10 max-h-[60vh]  scrollbar">
+    <div
+      className={`p-5 overflow-y-auto xl:my-10 h-[55vh] sm:h-[75vh] ${
+        !isMobile ? "h-[vh]" : "sm:h-[75vh"
+      } mt-2 sm:mt-5 bg-background`}
+    >
+      <div className="grid gap-6 grid-cols-1 overflow-y-auto xl:my-10 max-h-[65vh]  scrollbar">
         <input
           type="text"
           placeholder="Quick Search"

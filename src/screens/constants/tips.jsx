@@ -7,7 +7,7 @@ export const Tips = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
-  const [remove, setRemove] = useState(false);
+
   const [isMobile, setIsMobile] = useState(false); // Start with false, will be updated in useEffect
 
   useEffect(() => {
@@ -68,12 +68,7 @@ export const Tips = () => {
 
         {/* Content */}
         <div className="flex-1 p-4">
-          <Search
-            remove={remove}
-            setRemove={setRemove}
-            isAdvSearch={isAdvSearch}
-            setIsAdvSearch={setIsAdvSearch}
-          />
+          <Search isAdvSearch={isAdvSearch} setIsAdvSearch={setIsAdvSearch} />
         </div>
       </div>
 

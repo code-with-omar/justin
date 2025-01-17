@@ -9,6 +9,7 @@ export default function SelectBrand() {
     setAdvanceStep,
     advanceStep,
     setAdvanceCard,
+    isMobile,
   } = useModal();
   const { data: brandsData, isFetching: brandsFetching } = useBrands();
 
@@ -33,7 +34,11 @@ export default function SelectBrand() {
     brand.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <div className=" p-5 overflow-y-auto xl:my-10 h-[72vh] md:h-[80vh] mt-2 sm:mt-5 bg-background">
+    <div
+      className={` p-5 overflow-y-auto xl:my-10 h-[55vh] md:h-[75vh] mt-2 sm:mt-5 bg-background ${
+        !isMobile && "h-[75vh]"
+      }`}
+    >
       <div className="grid gap-6 grid-cols-1 overflow-y-auto px-4">
         <input
           type="text"

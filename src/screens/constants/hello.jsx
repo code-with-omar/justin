@@ -17,12 +17,7 @@ const advancedWrapStep = ["Select Make", "Select Model", "Select Color"];
 const NO_IMAGE =
   "https://storage.googleapis.com/luna-colors/lib/no-image-xs.png";
 
-export default function Search({
-  setRemove,
-  buttonSecondary,
-  setError,
-  ...rest
-}) {
+export default function Search({ buttonSecondary, setError, ...rest }) {
   const [tipsDrawerOpen, setTipsDrawerOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("all");
   const [selectedColor, setSelectedColor] = useState(null);
@@ -338,7 +333,6 @@ export default function Search({
                   recipeData={recipeData}
                   imageQueries={imageQueries}
                   getUndercoatImg={getUndercoatImg}
-                  setRemove={setRemove}
                 />
               )
             )}
@@ -397,7 +391,6 @@ export default function Search({
                         recipeData={recipeData}
                         imageQueries={imageQueries}
                         getUndercoatImg={getUndercoatImg}
-                        setRemove={setRemove}
                       />
                     )
                   )}

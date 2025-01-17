@@ -9,7 +9,6 @@ export default function ConfirmColor({
   selectedColor,
   onRecipeClick,
   getColorImage,
-  setRemove,
   recipeData,
   getUndercoatImg,
 }) {

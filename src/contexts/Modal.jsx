@@ -7,7 +7,7 @@ export function ModalProvider({ children }) {
   const [step, setStep] = useState("1");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
   const [searchTerms, setSearchTerms] = useState({});
   const [stepsValue, setStepsValue] = useState({ brand: null, modelId: null });
   const [resultCard, setResultCard] = useState("1");
@@ -42,7 +42,7 @@ export function ModalProvider({ children }) {
     setStep("1");
     setIsLoading(false);
     setIsOpen(false);
-    setIsSidebarCollapsed(false);
+
     setInitialAdvance(false);
     setIsSearching(false);
     setAdvanceStep(1);
@@ -58,22 +58,32 @@ export function ModalProvider({ children }) {
       document.body.style.paddingRight = "initial";
     }, 0);
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 900);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const tipsCloseModal = () => {
     setIsTipsOpen(false);
   };
+
   const value = {
     stepsValue,
     isOpen,
     step,
     isLoading,
-    isSidebarCollapsed,
     setIsLoading,
     setStep,
     setIsOpen,
     openModal,
     closeModal,
     setStepsValue,
-    setIsSidebarCollapsed,
     resultCard,
     setResultCard,
     searchStep,
