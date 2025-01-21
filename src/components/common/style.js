@@ -1,9 +1,9 @@
 export const TipsErrorDrawerStyle = (isDrawerOpen, isMobile) => ({
   position: "fixed",
-  zIndex: isDrawerOpen ? 60 : 50,
+  zIndex: 60,
   backgroundColor: "#1cbcba",
   color: "black",
-  transition: "transform 0.3s",
+  transition: "transform 0.3s, opacity 0.3s",
   top: isMobile ? "13%" : "0",
   right: "0",
   bottom: "auto",
@@ -16,6 +16,8 @@ export const TipsErrorDrawerStyle = (isDrawerOpen, isMobile) => ({
     : isMobile
     ? "translateY(100%)"
     : "translateX(100%)",
+  opacity: isDrawerOpen ? 1 : 0, // Fades out when closing
+  pointerEvents: isDrawerOpen ? "auto" : "none", // Prevent interaction when closed
   display: "flex",
   flexDirection: "column",
   borderTopLeftRadius:

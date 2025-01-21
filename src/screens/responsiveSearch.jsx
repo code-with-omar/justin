@@ -27,7 +27,6 @@ export const ResponsiveSearch = () => {
     initialAdvance,
     setInitialAdvance,
     isMobile,
-    setIsMobile,
   } = useModal();
 
   const [isAdvSearch, setIsAdvSearch] = useState(false);
